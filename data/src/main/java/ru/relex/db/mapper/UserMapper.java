@@ -55,4 +55,31 @@ public interface UserMapper {
             "DELETE FROM users WHERE user_id = #{id}"
     )
     void delete(@Param("id") int id);
+
+    @Insert(
+            "INSERT INTO users(" +
+                    "user_id, " +
+                    "username, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "email, " +
+                    "password, " +
+                    "role) " +
+                    "VALUE" +
+                    "(" +
+                    "#{userId}, " +
+                    "#{username}, " +
+                    "#{firstName}, " +
+                    "#{lastName}, " +
+                    "#{email}, " +
+                    "#{password}, " +
+                    "#{role}) "
+    )
+    @SelectKey(
+            before = false,
+            keyProperty = "userId",
+            keyColumn = "user_id",
+            statement = "select currval('users_user_id_seq')",
+            resultType = Integer.class)
+    void insert(User user);
 }

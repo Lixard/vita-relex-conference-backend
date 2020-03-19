@@ -1,6 +1,5 @@
 plugins {
     java
-    application
 }
 
 allprojects {
@@ -18,10 +17,6 @@ allprojects {
     configure<JavaPluginConvention> {
         sourceCompatibility = JavaVersion.VERSION_11
     }
-}
-
-application {
-    mainClassName = "ru.relex.App"
 }
 
 dependencies {

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Maxim Borisov
+      comment: first part of initial database script
+      changes:
+        - sqlFile:
+            path: initial_script1.sql
+            relativeToChangelogFile: true

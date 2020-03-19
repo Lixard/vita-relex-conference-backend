@@ -15,3 +15,11 @@ databaseChangeLog:
         - sqlFile:
             path: initial_script2.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: Kristina Maltseva
+      comment: third part of initial database script
+      changes:
+        - sqlFile:
+            path: initial_script3.sql
+            relativeToChangelogFile: true

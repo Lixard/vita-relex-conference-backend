@@ -17,6 +17,10 @@ allprojects {
     configure<JavaPluginConvention> {
         sourceCompatibility = JavaVersion.VERSION_11
     }
+
+    dependencies{
+        implementation("ru.relex:commons:1.0")
+    }
 }
 
 dependencies {

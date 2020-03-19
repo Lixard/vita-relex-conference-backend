@@ -7,3 +7,11 @@ databaseChangeLog:
         - sqlFile:
             path: initial_script1.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 1
+      author: Vlad Peltikhin
+      comment: second part of initial database script
+      changes:
+        - sqlFile:
+            path: initial_script2.sql
+            relativeToChangelogFile: true

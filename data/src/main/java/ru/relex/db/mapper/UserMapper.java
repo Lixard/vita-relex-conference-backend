@@ -18,7 +18,7 @@ public interface UserMapper {
                     "role, " +
                     "deleted " +
                     "FROM users " +
-                    "WHERE (#{search} IS NULL " +
+                    "WHERE (#{search:VARCHAR} IS NULL " +
                     "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
                     "AND NOT deleted"
     )

@@ -4,3 +4,4 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  type-handlers-package: ru.relex.db.handler

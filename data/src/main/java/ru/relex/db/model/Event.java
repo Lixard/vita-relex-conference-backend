@@ -1,12 +1,13 @@
 package ru.relex.db.model;
 
+import ru.relex.commons.model.EventType;
+
 import java.sql.Timestamp;
 
 public class Event {
     private int eventId;
     private String eventName;
-    //TODO Сделать enum для типов ивентов и поменять здесь int на него
-    private int eventType;
+    private EventType eventType;
     private int conferenceId;
     private String htmlDescription;
     private String location;
@@ -31,11 +32,11 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public int getEventType() {
+    public EventType getEventType() {
         return eventType;
     }
 
-    public void setEventType(int eventType) {
+    public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
 

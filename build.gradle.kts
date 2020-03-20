@@ -26,4 +26,5 @@ allprojects {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:2.2.5.RELEASE")
     implementation(project(":services"))
+    implementation(project(":security"))
 }

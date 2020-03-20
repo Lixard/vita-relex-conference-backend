@@ -5,6 +5,7 @@ import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.User;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.mapstruct.UserStruct;
+import ru.relex.services.service.IPasswordEncoderService;
 import ru.relex.services.service.IUserService;
 
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.List;
 public class UserServices implements IUserService {
     private UserMapper userMapper;
     private UserStruct userStruct;
+    private IPasswordEncoderService passwordEncoderService;
 
     @Autowired
-    public UserServices(UserMapper userMapper, UserStruct userStruct) {
+    public UserServices(UserMapper userMapper, UserStruct userStruct, IPasswordEncoderService passwordEncoderService) {
         this.userMapper = userMapper;
         this.userStruct = userStruct;
+        this.passwordEncoderService = passwordEncoderService;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class UserServices implements IUserService {
     @Override
     public UserDto create(UserDto userDto) {
         User user = userStruct.fromDto(userDto);
+        user.setPassword(passwordEncoderService.encode(user.getPassword()));
         userMapper.insert(user);
         return userStruct.toDto(user);
     }

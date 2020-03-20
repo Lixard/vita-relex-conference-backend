@@ -59,7 +59,6 @@ public interface UserMapper {
 
     @Insert(
             "INSERT INTO users(" +
-                    "user_id, " +
                     "username, " +
                     "first_name, " +
                     "last_name, " +
@@ -69,7 +68,6 @@ public interface UserMapper {
                     "deleted) " +
                     "VALUES " +
                     "(" +
-                    "#{userId}, " +
                     "#{username}, " +
                     "#{firstName}, " +
                     "#{lastName}, " +
@@ -82,7 +80,7 @@ public interface UserMapper {
             before = false,
             keyProperty = "userId",
             keyColumn = "user_id",
-            statement = "select currval('users_user_id_seq')",
+            statement = "select currval(pg_get_serial_sequence('users', 'user_id'))",
             resultType = Integer.class)
     void insert(User user);
 }

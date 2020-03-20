@@ -18,8 +18,9 @@ public interface UserMapper {
                     "role, " +
                     "deleted " +
                     "FROM users " +
-                    "WHERE #{search} IS NULL " +
-                    "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')"
+                    "WHERE (#{search} IS NULL " +
+                    "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
+                    "AND NOT deleted"
     )
     List<User> getUsers(@Param("search") String search);
 
@@ -34,25 +35,25 @@ public interface UserMapper {
                 "role, " +
                 "deleted " +
                 "FROM users " +
-                "WHERE user_id = #{id} "
+                "WHERE user_id = #{id} AND NOT deleted"
     )
     User findById(@Param("id") int id);
 
     @Update(
             "UPDATE users" +
-                    "SET username = #{username}," +
-                    "first_name = #{firstName}" +
-                    "last_name = #{lastName}" +
-                    "email = #{email}" +
-                    "password = #{password}" +
-                    "role = #{role}" +
-                    "deleted = #{deleted}" +
+                    "SET username = #{username}, " +
+                    "first_name = #{firstName}, " +
+                    "last_name = #{lastName}, " +
+                    "email = #{email}, " +
+                    "password = #{password}, " +
+                    "role = #{role}, " +
+                    "deleted = #{deleted} " +
                     "WHERE user_id = #{userId}"
     )
     void update(User user);
 
-    @Delete(
-            "DELETE FROM users WHERE user_id = #{id}"
+    @Update(
+            "UPDATE users SET deleted = 'true' WHERE user_id = #{id}"
     )
     void delete(@Param("id") int id);
 
@@ -64,7 +65,8 @@ public interface UserMapper {
                     "last_name, " +
                     "email, " +
                     "password, " +
-                    "role) " +
+                    "role, " +
+                    "deleted) " +
                     "VALUE" +
                     "(" +
                     "#{userId}, " +
@@ -73,7 +75,8 @@ public interface UserMapper {
                     "#{lastName}, " +
                     "#{email}, " +
                     "#{password}, " +
-                    "#{role}) "
+                    "#{role}, " +
+                    "#{deleted}) "
     )
     @SelectKey(
             before = false,

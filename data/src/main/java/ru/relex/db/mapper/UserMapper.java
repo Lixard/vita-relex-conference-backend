@@ -67,7 +67,7 @@ public interface UserMapper {
                     "password, " +
                     "role, " +
                     "deleted) " +
-                    "VALUE" +
+                    "VALUES " +
                     "(" +
                     "#{userId}, " +
                     "#{username}, " +

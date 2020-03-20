@@ -1,6 +1,7 @@
 package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.User;
 import ru.relex.services.dto.user.UserDto;
@@ -10,6 +11,7 @@ import ru.relex.services.service.IUserService;
 
 import java.util.List;
 
+@Service
 public class UserServices implements IUserService {
     private UserMapper userMapper;
     private UserStruct userStruct;
@@ -26,6 +28,12 @@ public class UserServices implements IUserService {
     public List<UserDto> findUsers(String search) {
         List<User> users = userMapper.getUsers(search);
         return userStruct.toDto(users);
+    }
+
+    @Override
+    public UserDto findById(int id) {
+        UserDto user = userStruct.toDto(userMapper.findById(id));
+        return user;
     }
 
     @Override

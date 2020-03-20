@@ -7,6 +7,8 @@ import java.util.List;
 public interface IUserService {
     List<UserDto> findUsers(String search);
 
+    UserDto findById(int id);
+
     UserDto create(UserDto userDto);
 
     UserDto update(UserDto userDto);

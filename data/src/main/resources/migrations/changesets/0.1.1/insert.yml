@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Maxim Borisov
+      comment: insert enum values into roles and event_types
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

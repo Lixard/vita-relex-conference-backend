@@ -43,7 +43,7 @@ public interface UserMapper {
 
     @Update(
             //language=PostgreSQL
-            "UPDATE users" +
+            "UPDATE users " +
                     "SET username = #{username}, " +
                     "first_name = #{firstName}, " +
                     "last_name = #{lastName}, " +
@@ -86,6 +86,7 @@ public interface UserMapper {
             keyProperty = "userId",
             keyColumn = "user_id",
             statement = "select currval(pg_get_serial_sequence('users', 'user_id'))",
-            resultType = Integer.class)
+            resultType = Integer.class
+    )
     void insert(User user);
 }

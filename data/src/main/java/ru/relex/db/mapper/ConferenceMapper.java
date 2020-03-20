@@ -7,7 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface ConferenceMapper {
-    @Select("SELECT " +
+    @Select(
+            //language=PostgreSQL
+            "SELECT " +
             "conference_id, " +
             "conference_name, " +
             "html_description, " +
@@ -21,7 +23,9 @@ public interface ConferenceMapper {
     )
     List<Conference> getConferences();
 
-    @Select("SELECT " +
+    @Select(
+            //language=PostgreSQL
+            "SELECT " +
             "conference_id, " +
             "conference_name, " +
             "html_description, " +
@@ -36,7 +40,9 @@ public interface ConferenceMapper {
     )
     Conference findById(@Param("id") int id);
 
-    @Update("UPDATE conferences SET " +
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conferences SET " +
             "conference_name = #{conferenceName}, " +
             "html_description = #{htmlDescription}, " +
             "location = #{location}, " +
@@ -49,13 +55,18 @@ public interface ConferenceMapper {
     )
     void update(Conference conference);
 
-    @Update("UPDATE conferences SET deleted = 'true' WHERE conference_id = #{id}")
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conferences SET deleted = 'true' WHERE conference_id = #{id}"
+    )
     void delete(@Param("id") int id);
 
-    @Insert("INSERT INTO conferences(conference_name, html_description, location," +
+    @Insert(
+            //language=PostgreSQL
+            "INSERT INTO conferences(conference_name, html_description, location," +
             " date_start, date_end, owner, created_at, deleted) " +
             "VALUES (#{conferenceName}, #{htmlDescription}, #{location}, #{dateStart}, " +
-            "#{dateEnd}, #{owner}, #{createdAt}, #{deleted}))"
+            "#{dateEnd}, #{owner}, #{createdAt}, #{deleted})"
     )
     @SelectKey(
             before = false,

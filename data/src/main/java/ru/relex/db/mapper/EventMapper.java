@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface EventMapper {
     @Select(
+            //language=PostgreSQL
             "SELECT " +
             "event_id, " +
             "event_name, " +
@@ -24,6 +25,7 @@ public interface EventMapper {
     List<Event> getEvents();
 
     @Select(
+            //language=PostgreSQL
             "SELECT " +
             "event_id, " +
             "event_name, " +
@@ -41,6 +43,7 @@ public interface EventMapper {
     Event findById(@Param("id") int id);
 
     @Update(
+            //language=PostgreSQL
             "UPDATE events SET " +
             "event_name = #{eventName}, " +
             "event_type = #{eventType}, " +
@@ -49,15 +52,20 @@ public interface EventMapper {
             "time_start = #{timeStart}, " +
             "time_end = #{timeEnd}, " +
             "created_by = #{createdBy}, " +
-            "deleted = #{deleted}" +
+            "deleted = #{deleted} " +
             "WHERE event_id = #{eventId}"
     )
     void update(Event event);
 
-    @Update("UPDATE events SET deleted = 'true' WHERE event_id = #{id}")
+    @Update(
+            //language=PostgreSQL
+            "UPDATE events SET deleted = 'true' WHERE event_id = #{id}"
+    )
     void delete(@Param("id") int id);
 
-    @Insert("INSERT INTO events " +
+    @Insert(
+            //language=PostgreSQL
+            "INSERT INTO events " +
             "(event_name, event_type, conference_id, html_description, " +
             "location, time_start, time_end, created_by, deleted) " +
             "VALUES (#{eventName}, #{eventType}, #{conferenceId}, #{location}, " +

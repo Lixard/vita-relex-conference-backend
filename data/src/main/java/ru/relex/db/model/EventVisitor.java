@@ -3,7 +3,7 @@ package ru.relex.db.model;
 public class EventVisitor {
     private int userId;
     private int eventId;
-    private boolean deleted = false;
+    private boolean deleted;
 
     public int getUserId() {
         return userId;

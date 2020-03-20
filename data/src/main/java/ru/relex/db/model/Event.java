@@ -14,7 +14,7 @@ public class Event {
     private Timestamp timeStart;
     private Timestamp timeEnd;
     private int createdBy;
-    private boolean deleted = false;
+    private boolean deleted;
 
     public int getEventId() {
         return eventId;

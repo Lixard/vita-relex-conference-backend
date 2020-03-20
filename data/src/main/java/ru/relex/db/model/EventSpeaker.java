@@ -7,7 +7,7 @@ public class EventSpeaker {
     private int eventId;
     private int createdBy;
     private Timestamp createdAt;
-    private boolean deleted = false;
+    private boolean deleted;
 
     public int getUserId() {
         return userId;

@@ -10,7 +10,7 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private Boolean deleted = false;
+    private Boolean deleted;
 
     public int getUserId() {
         return userId;

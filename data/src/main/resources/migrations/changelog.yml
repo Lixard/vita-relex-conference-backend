@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: changesets/0.1.1/insert.yml
       relativeToChangelogFile: true
+  - include:
+      file: changesets/0.1.2/changePasswordLength.yml
+      relativeToChangelogFile: true

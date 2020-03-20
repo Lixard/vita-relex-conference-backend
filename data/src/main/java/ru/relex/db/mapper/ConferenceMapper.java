@@ -16,7 +16,7 @@ public interface ConferenceMapper {
             "date_end, " +
             "owner,  " +
             "created_at, " +
-            "deleted" +
+            "deleted " +
             "FROM conferences WHERE NOT deleted"
     )
     List<Conference> getConferences();
@@ -30,7 +30,7 @@ public interface ConferenceMapper {
             "date_end, " +
             "owner, " +
             "created_at, " +
-            "deleted" +
+            "deleted " +
             "FROM conferences " +
             "WHERE conference_id = #{id} AND NOT deleted"
     )
@@ -45,11 +45,11 @@ public interface ConferenceMapper {
             "owner = #{owner}, " +
             "created_at = #{createdAt}, " +
             "deleted = #{deleted} " +
-            "WHERE conference_id = #{conferenceId}"
+            "WHERE conference_id = #{conferenceId} AND NOT deleted"
     )
     void update(Conference conference);
 
-    @Delete("DELETE FROM conferences WHERE conference_id = #{id}")
+    @Update("UPDATE conferences SET deleted = 'true' WHERE conference_id = #{id}")
     void delete(@Param("id") int id);
 
     @Insert("INSERT INTO conferences(conference_name, html_description, location," +

@@ -2,11 +2,14 @@ package ru.relex.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import ru.relex.security.SecurityConfiguration;
 import ru.relex.services.ServicesConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(
+        scanBasePackages = "ru.relex.rest"
+)
 @Import({
         ServicesConfiguration.class,
         SecurityConfiguration.class,

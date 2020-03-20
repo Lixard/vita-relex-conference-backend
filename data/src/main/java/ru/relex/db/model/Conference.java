@@ -11,7 +11,7 @@ public class Conference {
     private Timestamp dateEnd;
     private int owner;
     private Timestamp createdAt;
-    private boolean deleted;
+    private boolean deleted = false;
 
     public int getConferenceId() {
         return conferenceId;

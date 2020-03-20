@@ -7,7 +7,7 @@ public class ConferenceOrganizer {
     private int conferenceId;
     private int createdBy;
     private Timestamp createdAt;
-    private boolean deleted;
+    private boolean deleted = false;
 
     public int getUserId() {
         return userId;

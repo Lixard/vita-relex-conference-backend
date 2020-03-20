@@ -13,7 +13,7 @@ public class Event {
     private Timestamp timeStart;
     private Timestamp timeEnd;
     private int createdBy;
-    private boolean deleted;
+    private boolean deleted = false;
 
     public int getEventId() {
         return eventId;

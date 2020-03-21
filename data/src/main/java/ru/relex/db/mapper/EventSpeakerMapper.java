@@ -49,8 +49,8 @@ public interface EventSpeakerMapper {
     @Insert(
             //language=PostgreSQL
             "INSERT INTO event_speakers(user_id, event_id, " +
-            "created_by, created_at, deleted) " +
-            "VALUES (#{userId}, #{eventId}, #{createdBy}, #{createdAt}, #{deleted})"
+            "created_by, created_at) " +
+            "VALUES (#{userId}, #{eventId}, #{createdBy}, #{createdAt})"
     )
     void insert(EventSpeaker eventSpeaker);
 }

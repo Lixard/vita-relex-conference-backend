@@ -67,9 +67,9 @@ public interface EventMapper {
             //language=PostgreSQL
             "INSERT INTO events " +
             "(event_name, event_type, conference_id, html_description, " +
-            "location, time_start, time_end, created_by, deleted) " +
-            "VALUES (#{eventName}, #{eventType}, #{conferenceId}, #{location}, " +
-            "#{timeStart}, #{timeEnd}, #{createdBy}, #{deleted})"
+            "location, time_start, time_end, created_by) " +
+            "VALUES (#{eventName}, #{eventType}, #{conferenceId}, #{html_description}, #{location}, " +
+            "#{timeStart}, #{timeEnd}, #{createdBy})"
     )
     @SelectKey(
             before = false,

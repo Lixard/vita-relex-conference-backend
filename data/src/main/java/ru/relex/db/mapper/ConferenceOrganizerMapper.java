@@ -48,8 +48,8 @@ public interface ConferenceOrganizerMapper {
     @Insert(
             //language=PostgreSQL
             "INSERT INTO conference_organizers(user_id, conference_id, " +
-            "created_by, created_at, deleted) " +
-            "VALUES (#{userId}, #{conferenceId}, #{createdBy}, #{createdAt}, #{deleted})"
+            "created_by, created_at) " +
+            "VALUES (#{userId}, #{conferenceId}, #{createdBy}, #{createdAt})"
     )
     void insert(ConferenceOrganizer conferenceOrganizer);
 }

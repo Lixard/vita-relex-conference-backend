@@ -31,8 +31,8 @@ public interface EventVisitorMapper {
 
     @Insert(
             //language=PostgreSQL
-            "INSERT INTO event_visitors(user_id, event_id, deleted) " +
-            "VALUES (#{userId}, #{eventId}, #{deleted})"
+            "INSERT INTO event_visitors(user_id, event_id) " +
+            "VALUES (#{userId}, #{eventId})"
     )
     void insert(EventVisitor eventVisitor);
 }

@@ -69,8 +69,7 @@ public interface UserMapper {
                     "last_name, " +
                     "email, " +
                     "password, " +
-                    "role, " +
-                    "deleted) " +
+                    "role) " +
                     "VALUES " +
                     "(" +
                     "#{username}, " +
@@ -78,8 +77,7 @@ public interface UserMapper {
                     "#{lastName}, " +
                     "#{email}, " +
                     "#{password}, " +
-                    "#{role}, " +
-                    "#{deleted}) "
+                    "#{role})"
     )
     @SelectKey(
             before = false,

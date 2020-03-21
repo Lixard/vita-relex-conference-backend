@@ -53,4 +53,11 @@ public interface EventSpeakerMapper {
             "VALUES (#{userId}, #{eventId}, #{createdBy}, #{createdAt})"
     )
     void insert(EventSpeaker eventSpeaker);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET deleted = 'false' " +
+            "WHERE user_id = #{userId} AND event_id = #{eventId}"
+    )
+    void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
 }

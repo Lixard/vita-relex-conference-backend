@@ -79,4 +79,10 @@ public interface EventMapper {
             resultType = Integer.class
     )
     void insert(Event event);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE events SET deleted = 'false' WHERE event_id = #{id}"
+    )
+    void resurrect(@Param("id") int id);
 }

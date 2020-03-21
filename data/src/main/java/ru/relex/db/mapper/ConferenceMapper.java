@@ -75,4 +75,10 @@ public interface ConferenceMapper {
             resultType = Integer.class
     )
     void insert(Conference conference);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conferences SET deleted = 'false' WHERE conference_id = #{id}"
+    )
+    void resurrect(@Param("id") int id);
 }

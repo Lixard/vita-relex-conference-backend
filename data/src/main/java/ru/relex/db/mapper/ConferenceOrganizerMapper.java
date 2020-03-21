@@ -52,4 +52,11 @@ public interface ConferenceOrganizerMapper {
             "VALUES (#{userId}, #{conferenceId}, #{createdBy}, #{createdAt})"
     )
     void insert(ConferenceOrganizer conferenceOrganizer);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET deleted = 'false' " +
+            "WHERE user_id = #{userId} AND conference_id = #{conferenceId}"
+    )
+    void resurrect(@Param("id") int userId, @Param("conferenceId") int conferenceId);
 }

@@ -87,4 +87,10 @@ public interface UserMapper {
             resultType = Integer.class
     )
     void insert(User user);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE users SET deleted = 'false' WHERE user_id = #{id}"
+    )
+    void resurrect(@Param("id") int id);
 }

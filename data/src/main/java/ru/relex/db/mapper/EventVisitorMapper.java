@@ -35,4 +35,11 @@ public interface EventVisitorMapper {
             "VALUES (#{userId}, #{eventId})"
     )
     void insert(EventVisitor eventVisitor);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'false' " +
+            "WHERE user_id = #{userId} AND event_id = #{eventId}"
+    )
+    void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
 }

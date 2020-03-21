@@ -58,5 +58,5 @@ public interface ConferenceOrganizerMapper {
             "UPDATE conference_organizers SET deleted = 'false' " +
             "WHERE user_id = #{userId} AND conference_id = #{conferenceId}"
     )
-    void resurrect(@Param("id") int userId, @Param("conferenceId") int conferenceId);
+    void resurrect(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
 }

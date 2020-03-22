@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
+import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
+import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceService;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 )
 public class ConferenceController {
     private IConferenceService conferenceService;
+    private IConferenceOrganizerService conferenceOrganizersService;
 
     @Autowired
     public ConferenceController(IConferenceService conferenceService) {
@@ -29,6 +32,11 @@ public class ConferenceController {
     @GetMapping("/{id}")
     ConferenceDto findById(@PathVariable("id") int id) {
         return conferenceService.findById(id);
+    }
+
+    @GetMapping("/conference/{id}/users")
+    ConferenceOrganizerDto findUserIdByConference(@PathVariable("id") int id) {
+        return conferenceOrganizersService.findUserIdByConference(id);
     }
 
     @PutMapping("/{id}")

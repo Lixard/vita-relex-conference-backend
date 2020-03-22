@@ -1,3 +1,5 @@
+server :
+  port: 8888
 spring:
   liquibase:
     change-log: classpath:migrations/changelog.yml

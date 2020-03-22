@@ -1,5 +1,4 @@
 rootProject.name = "backend"
-include("data")
-include("services")
+include("data","services", "security")
 includeBuild("commons")
-include("security")
+

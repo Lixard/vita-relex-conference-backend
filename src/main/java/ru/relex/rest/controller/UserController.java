@@ -3,7 +3,9 @@ package ru.relex.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IUserService;
 
 import java.util.List;
@@ -15,9 +17,11 @@ import java.util.List;
 )
 public class UserController {
     private IUserService userService;
+    private IConferenceOrganizerService conferenceOrganizersService;
 
     @Autowired
     public UserController(IUserService userService) {
+        this.conferenceOrganizersService = conferenceOrganizersService;
         this.userService = userService;
     }
 
@@ -29,6 +33,11 @@ public class UserController {
     @GetMapping("/{id}")
     UserDto findById(@PathVariable("id") int id) {
         return userService.findById(id);
+    }
+
+    @GetMapping("/users/{id}/conference")
+    ConferenceOrganizerDto findConferenceByUserId(@PathVariable("id") int id) {
+        return conferenceOrganizersService.findConferenceByUserId(id);
     }
 
     @PutMapping("/{id}")

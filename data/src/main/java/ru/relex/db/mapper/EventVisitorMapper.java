@@ -31,8 +31,15 @@ public interface EventVisitorMapper {
 
     @Insert(
             //language=PostgreSQL
-            "INSERT INTO event_visitors(user_id, event_id, deleted) " +
-            "VALUES (#{userId}, #{eventId}, #{deleted})"
+            "INSERT INTO event_visitors(user_id, event_id) " +
+            "VALUES (#{userId}, #{eventId})"
     )
     void insert(EventVisitor eventVisitor);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'false' " +
+            "WHERE user_id = #{userId} AND event_id = #{eventId}"
+    )
+    void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
 }

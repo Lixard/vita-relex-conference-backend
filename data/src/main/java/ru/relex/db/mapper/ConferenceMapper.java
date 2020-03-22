@@ -49,8 +49,7 @@ public interface ConferenceMapper {
             "date_start = #{dateStart}, " +
             "date_end = #{dateEnd}, " +
             "owner = #{owner}, " +
-            "created_at = #{createdAt}, " +
-            "deleted = #{deleted} " +
+            "created_at = #{createdAt} " +
             "WHERE conference_id = #{conferenceId} AND NOT deleted"
     )
     void update(Conference conference);
@@ -64,9 +63,9 @@ public interface ConferenceMapper {
     @Insert(
             //language=PostgreSQL
             "INSERT INTO conferences(conference_name, html_description, location," +
-            " date_start, date_end, owner, created_at, deleted) " +
+            " date_start, date_end, owner, created_at) " +
             "VALUES (#{conferenceName}, #{htmlDescription}, #{location}, #{dateStart}, " +
-            "#{dateEnd}, #{owner}, #{createdAt}, #{deleted})"
+            "#{dateEnd}, #{owner}, #{createdAt})"
     )
     @SelectKey(
             before = false,
@@ -76,4 +75,10 @@ public interface ConferenceMapper {
             resultType = Integer.class
     )
     void insert(Conference conference);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conferences SET deleted = 'false' WHERE conference_id = #{id}"
+    )
+    void resurrect(@Param("id") int id);
 }

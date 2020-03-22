@@ -69,8 +69,7 @@ public interface UserMapper {
                     "last_name, " +
                     "email, " +
                     "password, " +
-                    "role, " +
-                    "deleted) " +
+                    "role) " +
                     "VALUES " +
                     "(" +
                     "#{username}, " +
@@ -78,8 +77,7 @@ public interface UserMapper {
                     "#{lastName}, " +
                     "#{email}, " +
                     "#{password}, " +
-                    "#{role}, " +
-                    "#{deleted}) "
+                    "#{role})"
     )
     @SelectKey(
             before = false,
@@ -89,4 +87,10 @@ public interface UserMapper {
             resultType = Integer.class
     )
     void insert(User user);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE users SET deleted = 'false' WHERE user_id = #{id}"
+    )
+    void resurrect(@Param("id") int id);
 }

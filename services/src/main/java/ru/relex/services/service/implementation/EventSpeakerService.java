@@ -1,5 +1,6 @@
 package ru.relex.services.service.implementation;
 
+import org.springframework.stereotype.Service;
 import ru.relex.db.mapper.EventSpeakerMapper;
 import ru.relex.db.model.EventSpeaker;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
@@ -8,7 +9,7 @@ import ru.relex.services.service.IEventSpeakerService;
 
 import java.util.List;
 
-
+@Service
 public class EventSpeakerService implements IEventSpeakerService {
     private EventSpeakerMapper eventSpeakerMapper;
     private EventSpeakerStruct eventSpeakerStruct;

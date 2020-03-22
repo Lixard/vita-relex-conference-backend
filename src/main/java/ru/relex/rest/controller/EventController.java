@@ -54,6 +54,7 @@ public class EventController {
         return eventService.update(event);
     }
 
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     EventDto create(@RequestBody EventDto event) {
         return eventService.create(event);

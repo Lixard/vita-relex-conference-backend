@@ -10,4 +10,6 @@ public interface IEventVisitorService {
     List<EventVisitorDto> getVisitorsByEventId(int id);
 
     EventVisitorDto create(EventVisitorDto eventVisitorDto);
+
+    EventVisitorDto update(EventVisitorDto eventVisitorDto);
 }

@@ -34,9 +34,9 @@ public class ConferenceController {
         return conferenceService.findById(id);
     }
 
-    @GetMapping("/conference/{id}/users")
-    ConferenceOrganizerDto findUserIdByConference(@PathVariable("id") int id) {
-        return conferenceOrganizersService.findUserIdByConference(id);
+    @GetMapping("/{id}/organizers")
+    List<ConferenceOrganizerDto> getOrganizersByConferenceId(@PathVariable("id") int id) {
+        return conferenceOrganizersService.getOrganizersByConferenceId(id);
     }
 
     @PutMapping("/{id}")

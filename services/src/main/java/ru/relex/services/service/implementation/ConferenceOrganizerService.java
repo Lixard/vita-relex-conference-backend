@@ -7,6 +7,8 @@ import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
 import ru.relex.services.service.IConferenceOrganizerService;
 
+import java.util.List;
+
 @Service
 public class ConferenceOrganizerService implements IConferenceOrganizerService {
     private ConferenceOrganizerMapper conferenceOrganizerMapper;
@@ -20,15 +22,13 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     }
 
     @Override
-    public ConferenceOrganizerDto findUserIdByConference(int id) {
-        ConferenceOrganizerDto user = conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.findByConferenceId(id));
-        return user;
+    public List<ConferenceOrganizerDto> getOrganizersByConferenceId(int id) {
+        return conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.getOrganizersByConferenceId(id));
     }
 
     @Override
-    public ConferenceOrganizerDto findConferenceByUserId(int id) {
-        ConferenceOrganizerDto conference = conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.findByUserId(id));
-        return conference;
+    public List<ConferenceOrganizerDto> getConferencesByOrganizerId(int id) {
+        return conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.getConferencesByUserId(id));
     }
 
     @Override

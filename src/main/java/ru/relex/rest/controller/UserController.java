@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
+import ru.relex.services.dto.shedule.EventVisitorDto;
+import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
+import ru.relex.services.service.IEventSpeakerService;
+import ru.relex.services.service.IEventVisitorService;
 import ru.relex.services.service.IUserService;
 
 import java.util.List;
@@ -17,12 +21,16 @@ import java.util.List;
 )
 public class UserController {
     private IUserService userService;
-    private IConferenceOrganizerService conferenceOrganizersService;
+    private IConferenceOrganizerService conferenceOrganizerService;
+    private IEventSpeakerService eventSpeakerService;
+    private IEventVisitorService eventVisitorService;
 
     @Autowired
-    public UserController(IUserService userService) {
-        this.conferenceOrganizersService = conferenceOrganizersService;
+    public UserController(IUserService userService, IConferenceOrganizerService conferenceOrganizerService, IEventSpeakerService eventSpeakerService, IEventVisitorService eventVisitorService) {
         this.userService = userService;
+        this.conferenceOrganizerService = conferenceOrganizerService;
+        this.eventSpeakerService = eventSpeakerService;
+        this.eventVisitorService = eventVisitorService;
     }
 
     @GetMapping
@@ -35,9 +43,19 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @GetMapping("/users/{id}/conference")
-    ConferenceOrganizerDto findConferenceByUserId(@PathVariable("id") int id) {
-        return conferenceOrganizersService.findConferenceByUserId(id);
+    @GetMapping("/{id}/conference")
+    List<ConferenceOrganizerDto> getConferencesByUserId(@PathVariable("id") int id) {
+        return conferenceOrganizerService.getConferencesByOrganizerId(id);
+    }
+
+    @GetMapping("/{id}/schedule")
+    List<EventVisitorDto> getScheduleOfUser(@PathVariable("id") int id) {
+        return eventVisitorService.getScheduleOfUser(id);
+    }
+
+    @GetMapping("/{id}/events")
+    List<EventSpeakerDto> getEventsBySpeakerId(@PathVariable("id") int id) {
+        return eventSpeakerService.getEventsBySpeakerId(id);
     }
 
     @PutMapping("/{id}")

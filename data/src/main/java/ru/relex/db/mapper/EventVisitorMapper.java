@@ -14,13 +14,13 @@ public interface EventVisitorMapper {
             "SELECT user_id, event_id, deleted " +
             "FROM event_visitors WHERE event_id = #{eventId} AND NOT deleted"
     )
-    List<EventVisitor> allEventVisitors(@Param("eventId") int eventId);
+    List<EventVisitor> getVisitorsByEventId(@Param("eventId") int eventId);
     @Select(
             //language=PostgreSQL
             "SELECT user_id, event_id, deleted " +
             "FROM event_visitors WHERE user_id = #{visitorId} AND NOT deleted"
     )
-    List<EventVisitor> allVisitorEvents(@Param("userId") int userId);
+    List<EventVisitor> getScheduleOfUser(@Param("userId") int userId);
 
     @Update(
             //language=PostgreSQL

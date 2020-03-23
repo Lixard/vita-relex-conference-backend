@@ -1,22 +1,22 @@
 package ru.relex.services.dto.user;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import ru.relex.commons.model.Role;
+import ru.relex.services.constraint.UniqueUsername;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static ru.relex.services.constraint.ConstraintMessage.Field;
 import static ru.relex.services.constraint.ConstraintMessage.Constraint;
+import static ru.relex.services.constraint.ConstraintMessage.Field;
 
 public class UserDto {
 
     private int userId;
 
-    //TODO Нужно сделать свою аннотацию для проверки никнейма на уникальность
     @NotBlank(message = Field.USERNAME + Constraint.IS_EMPTY)
+    @UniqueUsername(message = Field.USERNAME + Constraint.NOT_UNIQUE)
     private String username;
 
     @Size(min = 8, message = Field.PASSWORD + Constraint.TOO_SHORT)

@@ -7,6 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT EXISTS(SELECT * FROM users WHERE username = #{username})"
+    )
+    boolean isUsernameExists(@Param("username") String username);
+
     @Select(
             //language=PostgreSQL
             "SELECT " +

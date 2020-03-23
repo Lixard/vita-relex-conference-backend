@@ -1,7 +1,6 @@
 package ru.relex.services.mapstruct;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import ru.relex.db.model.ConferenceOrganizer;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 

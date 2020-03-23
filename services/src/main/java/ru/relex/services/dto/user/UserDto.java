@@ -20,6 +20,7 @@ public class UserDto {
     private String username;
 
     @Size(min = 8, message = Field.PASSWORD + Constraint.TOO_SHORT)
+    @NotBlank(message = Field.PASSWORD + Constraint.IS_EMPTY)
     private String password;
 
     @NotNull(message = Field.ROLE + Constraint.IS_NULL)

@@ -38,7 +38,13 @@ public class EventsVisitorService implements IEventVisitorService {
         }
 
     @Override
-    public EventVisitorDto update(EventVisitorDto eventVisitorDto) {
-        return null;
+    public void remove(int userId, int eventId) {
+        eventVisitorMapper.delete( userId, eventId);
     }
+
+    @Override
+    public void resurrect(int userId, int eventId) {
+        eventVisitorMapper.resurrect( userId, eventId);
+    }
+
 }

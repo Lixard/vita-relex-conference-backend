@@ -51,4 +51,6 @@ public class ConferenceService implements IConferenceService {
     public void remove(int conferenceId) {
         conferenceMapper.delete(conferenceId);
     }
+
+
 }

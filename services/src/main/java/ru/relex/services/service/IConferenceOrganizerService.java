@@ -11,4 +11,6 @@ public interface IConferenceOrganizerService {
 
         void remove(int organizerId, int conferenceId);
 
+        void resurrect(int organizerId, int conferenceId);
+
 }

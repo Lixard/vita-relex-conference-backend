@@ -13,6 +13,8 @@ public interface IEventService {
 
     EventDto update(EventDto eventDto);
 
+    List<EventDto> getEventsByConferenceId( int conferenceId);
+
     void remove(int eventId);
 
 }

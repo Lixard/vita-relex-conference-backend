@@ -1,12 +1,15 @@
 package ru.relex.rest.controller;
 
+import javafx.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
+import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceService;
+import ru.relex.services.service.IEventService;
 
 import java.util.List;
 
@@ -18,11 +21,16 @@ import java.util.List;
 public class ConferenceController {
     private IConferenceService conferenceService;
     private IConferenceOrganizerService conferenceOrganizersService;
+    private IEventService eventService;
+
+    public ConferenceController(IConferenceService conferenceService, IConferenceOrganizerService conferenceOrganizersService, IEventService eventService) {
+        this.conferenceService = conferenceService;
+        this.conferenceOrganizersService = conferenceOrganizersService;
+        this.eventService = eventService;
+    }
 
     @Autowired
-    public ConferenceController(IConferenceService conferenceService) {
-        this.conferenceService = conferenceService;
-    }
+
 
     @GetMapping
     List<ConferenceDto> getConferences() {
@@ -32,6 +40,11 @@ public class ConferenceController {
     @GetMapping("/{id}")
     ConferenceDto findById(@PathVariable("id") int id) {
         return conferenceService.findById(id);
+    }
+
+    @GetMapping("/{id}/events")
+    List<EventDto> getEventsByConferenceId(@PathVariable("id") int id) {
+        return eventService.getEventsByConferenceId(id);
     }
 
     @GetMapping("/{id}/organizers")

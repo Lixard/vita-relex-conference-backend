@@ -27,6 +27,23 @@ public interface EventMapper {
     @Select(
             //language=PostgreSQL
             "SELECT " +
+                    "event_id, " +
+                    "event_name, " +
+                    "event_type, " +
+                    "conference_id, " +
+                    "html_description, " +
+                    "location, " +
+                    "time_start, " +
+                    "time_end, " +
+                    "created_by, " +
+                    "deleted " +
+                    "FROM events " +
+                    "WHERE conference_id = #{conference_id} AND NOT deleted"
+    )
+    List<Event> getEventsByConferenceId(int conference_id);
+    @Select(
+            //language=PostgreSQL
+            "SELECT " +
             "event_id, " +
             "event_name, " +
             "event_type, " +

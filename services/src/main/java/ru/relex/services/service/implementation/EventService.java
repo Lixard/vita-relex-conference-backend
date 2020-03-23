@@ -48,7 +48,14 @@ public class EventService implements IEventService {
     }
 
     @Override
+    public List<EventDto> getEventsByConferenceId(int conferenceId) {
+        return eventStruct.toDto(eventMapper.getEventsByConferenceId(conferenceId));
+    }
+
+    @Override
     public void remove(int eventId) {
         eventMapper.delete(eventId);
     }
+
+
 }

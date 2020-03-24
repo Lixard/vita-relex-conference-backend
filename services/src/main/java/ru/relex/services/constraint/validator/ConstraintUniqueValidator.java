@@ -1,7 +1,8 @@
-package ru.relex.services.constraint;
+package ru.relex.services.constraint.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.relex.db.mapper.UserMapper;
+import ru.relex.services.constraint.annotation.UniqueUsername;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

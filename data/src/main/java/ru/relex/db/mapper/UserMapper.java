@@ -10,6 +10,12 @@ public interface UserMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT EXISTS(SELECT * FROM users WHERE user_id = #{id})"
+    )
+    boolean isUserExists(@Param("id") int id);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT EXISTS(SELECT * FROM users WHERE username = #{username})"
     )
     boolean isUsernameExists(@Param("username") String username);

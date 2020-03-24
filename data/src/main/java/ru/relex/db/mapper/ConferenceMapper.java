@@ -49,7 +49,7 @@ public interface ConferenceMapper {
             "date_start = #{dateStart}, " +
             "date_end = #{dateEnd}, " +
             "owner = #{owner}, " +
-            "created_at = #{createdAt} " +
+            "created_at = current_timestamp " +
             "WHERE conference_id = #{conferenceId} AND NOT deleted"
     )
     void update(Conference conference);
@@ -65,7 +65,7 @@ public interface ConferenceMapper {
             "INSERT INTO conferences(conference_name, html_description, location," +
             " date_start, date_end, owner, created_at) " +
             "VALUES (#{conferenceName}, #{htmlDescription}, #{location}, #{dateStart}, " +
-            "#{dateEnd}, #{owner}, #{createdAt})"
+            "#{dateEnd}, #{owner}, current_timestamp)"
     )
     @SelectKey(
             before = false,

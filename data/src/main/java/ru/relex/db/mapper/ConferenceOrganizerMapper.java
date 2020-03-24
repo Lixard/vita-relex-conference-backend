@@ -49,7 +49,7 @@ public interface ConferenceOrganizerMapper {
             //language=PostgreSQL
             "INSERT INTO conference_organizers(user_id, conference_id, " +
             "created_by, created_at) " +
-            "VALUES (#{userId}, #{conferenceId}, #{createdBy}, #{createdAt})"
+            "VALUES (#{userId}, #{conferenceId}, #{createdBy}, current_timestamp)"
     )
     void insert(ConferenceOrganizer conferenceOrganizer);
 

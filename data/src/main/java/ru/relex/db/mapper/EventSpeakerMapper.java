@@ -42,7 +42,7 @@ public interface EventSpeakerMapper {
             //language=PostgreSQL
             "INSERT INTO event_speakers(user_id, event_id, " +
             "created_by, created_at) " +
-            "VALUES (#{userId}, #{eventId}, #{createdBy}, #{createdAt})"
+            "VALUES (#{userId}, #{eventId}, #{createdBy}, current_timestamp)"
     )
     void insert(EventSpeaker eventSpeaker);
 

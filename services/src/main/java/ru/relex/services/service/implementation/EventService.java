@@ -8,6 +8,7 @@ import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.mapstruct.EventStruct;
 import ru.relex.services.service.IEventService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -34,14 +35,14 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDto create(EventDto eventDto) {
+    public EventDto create(@Valid EventDto eventDto) {
         Event event = eventStruct.fromDto(eventDto);
         eventMapper.insert(event);
         return eventStruct.toDto(event);
     }
 
     @Override
-    public EventDto update(EventDto eventDto) {
+    public EventDto update(@Valid EventDto eventDto) {
         Event event = eventStruct.fromDto(eventDto);
         eventMapper.update(event);
         return eventStruct.toDto(event);

@@ -2,6 +2,7 @@ package ru.relex.services.service;
 
 import ru.relex.services.dto.event.EventDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface IEventService {
@@ -9,9 +10,9 @@ public interface IEventService {
 
     EventDto findById(int eventId);
 
-    EventDto create(EventDto eventDto);
+    EventDto create(@Valid EventDto eventDto);
 
-    EventDto update(EventDto eventDto);
+    EventDto update(@Valid EventDto eventDto);
 
     void remove(int eventId);
 

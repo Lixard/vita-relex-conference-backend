@@ -2,6 +2,7 @@ package ru.relex.services.service;
 
 import ru.relex.services.dto.shedule.EventVisitorDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface IEventVisitorService {
@@ -9,7 +10,7 @@ public interface IEventVisitorService {
 
     List<EventVisitorDto> getVisitorsByEventId(int id);
 
-    EventVisitorDto create(EventVisitorDto eventVisitorDto);
+    EventVisitorDto create(@Valid EventVisitorDto eventVisitorDto);
 
-    EventVisitorDto update(EventVisitorDto eventVisitorDto);
+    EventVisitorDto update(@Valid EventVisitorDto eventVisitorDto);
 }

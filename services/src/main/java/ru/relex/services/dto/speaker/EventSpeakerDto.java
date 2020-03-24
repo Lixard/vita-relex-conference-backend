@@ -1,56 +1,65 @@
 package ru.relex.services.dto.speaker;
 
 
+import ru.relex.services.constraint.annotation.EventExists;
+import ru.relex.services.constraint.annotation.UserExists;
 
 import java.sql.Timestamp;
 
 public class EventSpeakerDto {
 
-        private int userId;
-        private int eventId;
-        private int createdBy;
-        private Timestamp createdAt;
-        private boolean deleted;
+    @UserExists
+    private int userId;
 
-        public int getUserId() {
-            return userId;
-        }
+    @EventExists
+    private int eventId;
 
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
+    @UserExists
+    private int createdBy;
 
-        public int getEventId() {
-            return eventId;
-        }
+    private Timestamp createdAt;
 
-        public void setEventId(int eventId) {
-            this.eventId = eventId;
-        }
+    private boolean deleted;
 
-        public int getCreatedBy() {
-            return createdBy;
-        }
+    public int getUserId() {
+        return userId;
+    }
 
-        public void setCreatedBy(int createdBy) {
-            this.createdBy = createdBy;
-        }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-        public Timestamp getCreatedAt() {
-            return createdAt;
-        }
+    public int getEventId() {
+        return eventId;
+    }
 
-        public void setCreatedAt(Timestamp createdAt) {
-            this.createdAt = createdAt;
-        }
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
 
-        public boolean isDeleted() {
-            return deleted;
-        }
+    public int getCreatedBy() {
+        return createdBy;
+    }
 
-        public void setDeleted(boolean deleted) {
-            this.deleted = deleted;
-        }
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
 
 

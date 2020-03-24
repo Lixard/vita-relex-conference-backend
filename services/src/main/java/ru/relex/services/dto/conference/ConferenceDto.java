@@ -1,10 +1,30 @@
 package ru.relex.services.dto.conference;
 
+import ru.relex.services.constraint.annotation.UserExists;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import static ru.relex.services.constraint.ConstraintMessage.Constraint;
+import static ru.relex.services.constraint.ConstraintMessage.Field;
+
 public class ConferenceDto {
+
     private int conferenceId;
+
+    @NotBlank(message = Field.CONFERENCE_NAME + Constraint.IS_EMPTY)
+    @Size(max = 50, message = Field.CONFERENCE_NAME + Constraint.TOO_LONG)
     private String conferenceName;
+
+    @UserExists
     private int owner;
-    private boolean deleted = false;
+
+    private boolean deleted;
+
+    @Valid
+    @NotNull(message = Field.DETAILS + Constraint.IS_NULL)
     private DetailsDto details;
 
     public int getConferenceId() {

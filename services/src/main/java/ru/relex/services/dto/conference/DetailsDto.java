@@ -1,12 +1,28 @@
 package ru.relex.services.dto.conference;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
+import static ru.relex.services.constraint.ConstraintMessage.Constraint;
+import static ru.relex.services.constraint.ConstraintMessage.Field;
+
 public class DetailsDto {
+
+    @NotBlank(message = Field.HTML_DESCRIPTION + Constraint.IS_EMPTY)
     private String htmlDescription;
+
+    @NotBlank(message = Field.LOCATION + Constraint.IS_EMPTY)
+    @Size(max = 100, message = Field.LOCATION + Constraint.TOO_LONG)
     private String location;
+
+    @NotNull(message = Field.DATE_START + Constraint.IS_NULL)
     private Timestamp dateStart;
+
+    @NotNull(message = Field.DATE_END + Constraint.IS_NULL)
     private Timestamp dateEnd;
+
     private Timestamp createdAt;
 
     public String getHtmlDescription() {

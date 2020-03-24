@@ -7,6 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface ConferenceMapper {
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT EXISTS(SELECT * FROM conferences WHERE conference_id = #{id})"
+    )
+    boolean isConferenceExists(@Param("id") int id);
+
     @Select(
             //language=PostgreSQL
             "SELECT " +

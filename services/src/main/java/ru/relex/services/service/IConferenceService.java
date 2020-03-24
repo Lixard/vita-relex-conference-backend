@@ -2,6 +2,7 @@ package ru.relex.services.service;
 
 import ru.relex.services.dto.conference.ConferenceDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface IConferenceService {
@@ -9,9 +10,9 @@ public interface IConferenceService {
 
     ConferenceDto findById(int conferenceId);
 
-    ConferenceDto create(ConferenceDto conferenceDto);
+    ConferenceDto create(@Valid ConferenceDto conferenceDto);
 
-    ConferenceDto update(ConferenceDto conferenceDto);
+    ConferenceDto update(@Valid ConferenceDto conferenceDto);
 
     void remove(int conferenceId);
 }

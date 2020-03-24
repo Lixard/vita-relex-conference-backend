@@ -2,6 +2,7 @@ package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.ConferenceOrganizerMapper;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
@@ -9,11 +10,12 @@ import ru.relex.services.service.IConferenceOrganizerService;
 
 import java.util.List;
 
+//TODO Когда появится insert или update методы, то поставить @Valid у их аргументов
 @Service
+@Validated
 public class ConferenceOrganizerService implements IConferenceOrganizerService {
     private ConferenceOrganizerMapper conferenceOrganizerMapper;
     private ConferenceOrganizerStruct conferenceOrganizerStruct;
-
 
     @Autowired
     public ConferenceOrganizerService(ConferenceOrganizerMapper conferenceOrganizerMapper,ConferenceOrganizerStruct conferenceOrganizerStruct) {

@@ -7,6 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface EventMapper {
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT EXISTS(SELECT * FROM events WHERE event_id = #{id})"
+    )
+    boolean isEventExists(@Param("id") int id);
+
     @Select(
             //language=PostgreSQL
             "SELECT " +

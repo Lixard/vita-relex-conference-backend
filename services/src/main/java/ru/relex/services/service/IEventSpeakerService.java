@@ -11,7 +11,7 @@ public interface IEventSpeakerService {
 
     List<EventSpeakerDto> getEventsBySpeakerId(int id);
 
-    EventSpeakerDto create(@Valid EventSpeakerDto eventSpeakerDto);
+    void assignToEvent(@Valid EventSpeakerDto eventSpeakerDto);
 
     void remove(int speakerId, int eventId);
 

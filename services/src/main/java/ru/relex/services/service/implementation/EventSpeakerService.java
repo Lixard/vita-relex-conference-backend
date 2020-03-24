@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.EventSpeakerMapper;
+import ru.relex.db.model.Event;
 import ru.relex.db.model.EventSpeaker;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.mapstruct.EventSpeakerStruct;
@@ -37,10 +38,9 @@ public class EventSpeakerService implements IEventSpeakerService {
     }
 
     @Override
-    public EventSpeakerDto create(@Valid EventSpeakerDto eventSpeakerDto) {
+    public void assignToEvent(@Valid EventSpeakerDto eventSpeakerDto) {
         EventSpeaker eventSpeaker = eventSpeakerStruct.fromDto(eventSpeakerDto);
         eventSpeakerMapper.insert(eventSpeaker);
-        return eventSpeakerStruct.toDto(eventSpeaker);
     }
 
     @Override

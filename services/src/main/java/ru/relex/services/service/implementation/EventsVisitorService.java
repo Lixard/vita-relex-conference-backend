@@ -35,11 +35,10 @@ public class EventsVisitorService implements IEventVisitorService {
     }
 
     @Override
-    public EventVisitorDto create(@Valid EventVisitorDto eventVisitorDto) {
+    public void subscribeOnEvent(@Valid EventVisitorDto eventVisitorDto) {
         EventVisitor eventVisitor = eventVisitorStruct.fromDto(eventVisitorDto);
         eventVisitorMapper.insert(eventVisitor);
-        return eventVisitorStruct.toDto(eventVisitor);
-        }
+    }
 
     @Override
     public void remove(int userId, int eventId) {

@@ -1,6 +1,7 @@
 package ru.relex.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
@@ -64,8 +65,22 @@ public class UserController {
         return userService.update(user);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     UserDto create(@RequestBody UserDto user) {
         return userService.create(user);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/assign/conference",consumes = MediaType.APPLICATION_JSON_VALUE)
+    void assignToConference(@RequestBody ConferenceOrganizerDto organizer) {
+        conferenceOrganizerService.assignToConference(organizer);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/assign/event", consumes = MediaType.APPLICATION_JSON_VALUE)
+    void assignToEvent(@RequestBody EventSpeakerDto speaker) {
+        eventSpeakerService.assignToEvent(speaker);
+    }
+
 }

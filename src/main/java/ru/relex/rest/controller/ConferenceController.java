@@ -1,7 +1,8 @@
 package ru.relex.rest.controller;
 
-import javafx.event.Event;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
@@ -10,6 +11,7 @@ import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceService;
 import ru.relex.services.service.IEventService;
+
 
 import java.util.List;
 
@@ -23,14 +25,12 @@ public class ConferenceController {
     private IConferenceOrganizerService conferenceOrganizersService;
     private IEventService eventService;
 
+    @Autowired
     public ConferenceController(IConferenceService conferenceService, IConferenceOrganizerService conferenceOrganizersService, IEventService eventService) {
         this.conferenceService = conferenceService;
         this.conferenceOrganizersService = conferenceOrganizersService;
         this.eventService = eventService;
     }
-
-    @Autowired
-
 
     @GetMapping
     List<ConferenceDto> getConferences() {
@@ -57,9 +57,10 @@ public class ConferenceController {
         conference.setConferenceId(id);
         return conferenceService.update(conference);
     }
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ConferenceDto create(@RequestBody ConferenceDto conference) {
         return conferenceService.create(conference);
     }
+
 }

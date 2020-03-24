@@ -4,13 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.ConferenceOrganizerMapper;
+import ru.relex.db.model.ConferenceOrganizer;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
 import ru.relex.services.service.IConferenceOrganizerService;
 
+import javax.validation.Valid;
 import java.util.List;
 
-//TODO Когда появится insert или update методы, то поставить @Valid у их аргументов
 @Service
 @Validated
 public class ConferenceOrganizerService implements IConferenceOrganizerService {
@@ -31,6 +32,12 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     @Override
     public List<ConferenceOrganizerDto> getConferencesByOrganizerId(int id) {
         return conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.getConferencesByUserId(id));
+    }
+
+    @Override
+    public void assignToConference(@Valid ConferenceOrganizerDto conferenceOrganizerDto) {
+        ConferenceOrganizer conferenceOrganizer = conferenceOrganizerStruct.fromDto(conferenceOrganizerDto);
+        conferenceOrganizerMapper.insert(conferenceOrganizer);
     }
 
     @Override

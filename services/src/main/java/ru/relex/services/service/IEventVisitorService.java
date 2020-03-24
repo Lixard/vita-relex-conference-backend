@@ -10,7 +10,7 @@ public interface IEventVisitorService {
 
     List<EventVisitorDto> getVisitorsByEventId(int id);
 
-    EventVisitorDto create(@Valid EventVisitorDto eventVisitorDto);
+    void subscribeOnEvent(@Valid EventVisitorDto eventVisitorDto);
 
     void remove(int userId, int eventId);
 

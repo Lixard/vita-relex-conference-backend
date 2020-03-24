@@ -1,6 +1,7 @@
 package ru.relex.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.event.EventDto;
@@ -54,10 +55,17 @@ public class EventController {
         return eventService.update(event);
     }
 
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     EventDto create(@RequestBody EventDto event) {
         return eventService.create(event);
+    }
+
+    //мб нужно вернуть id
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/subscribe", consumes = MediaType.APPLICATION_JSON_VALUE)
+    void subscribeOnEvent(@RequestBody EventVisitorDto visitor) {
+        eventVisitorService.subscribeOnEvent(visitor);
     }
 
 }

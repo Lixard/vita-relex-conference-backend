@@ -1,5 +1,6 @@
 package ru.relex.services.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.db.mapper.EventVisitorMapper;
 import ru.relex.db.model.EventVisitor;
@@ -13,16 +14,20 @@ public class EventsVisitorService implements IEventVisitorService {
     private EventVisitorMapper eventVisitorMapper;
     private EventVisitorStruct eventVisitorStruct;
 
+    @Autowired
+    public EventsVisitorService(EventVisitorMapper eventVisitorMapper, EventVisitorStruct eventVisitorStruct) {
+        this.eventVisitorMapper = eventVisitorMapper;
+        this.eventVisitorStruct = eventVisitorStruct;
+    }
+
     @Override
     public List<EventVisitorDto> getScheduleOfUser(int id) {
-        List<EventVisitor> eventVisitor = eventVisitorMapper.getScheduleOfUser(id);
-        return eventVisitorStruct.toDto(eventVisitor);
+        return eventVisitorStruct.toDto(eventVisitorMapper.getScheduleOfUser(id));
     }
 
     @Override
     public List<EventVisitorDto> getVisitorsByEventId(int id) {
-        List<EventVisitor> eventVisitor = eventVisitorMapper.getVisitorsByEventId(id);
-        return eventVisitorStruct.toDto(eventVisitor);
+        return eventVisitorStruct.toDto(eventVisitorMapper.getVisitorsByEventId(id));
     }
 
     @Override
@@ -33,7 +38,13 @@ public class EventsVisitorService implements IEventVisitorService {
         }
 
     @Override
-    public EventVisitorDto update(EventVisitorDto eventVisitorDto) {
-        return null;
+    public void remove(int userId, int eventId) {
+        eventVisitorMapper.delete( userId, eventId);
     }
+
+    @Override
+    public void resurrect(int userId, int eventId) {
+        eventVisitorMapper.resurrect( userId, eventId);
+    }
+
 }

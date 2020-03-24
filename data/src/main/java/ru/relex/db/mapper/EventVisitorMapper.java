@@ -20,7 +20,7 @@ public interface EventVisitorMapper {
             "SELECT user_id, event_id, deleted " +
             "FROM event_visitors WHERE user_id = #{visitorId} AND NOT deleted"
     )
-    List<EventVisitor> getScheduleOfUser(@Param("userId") int userId);
+    List<EventVisitor> getScheduleOfUser(@Param("visitorId") int visitorId);
 
     @Update(
             //language=PostgreSQL

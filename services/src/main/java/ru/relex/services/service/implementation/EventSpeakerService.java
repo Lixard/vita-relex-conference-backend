@@ -1,5 +1,6 @@
 package ru.relex.services.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.db.mapper.EventSpeakerMapper;
 import ru.relex.db.model.EventSpeaker;
@@ -13,6 +14,12 @@ import java.util.List;
 public class EventSpeakerService implements IEventSpeakerService {
     private EventSpeakerMapper eventSpeakerMapper;
     private EventSpeakerStruct eventSpeakerStruct;
+
+    @Autowired
+    public EventSpeakerService(EventSpeakerMapper eventSpeakerMapper, EventSpeakerStruct eventSpeakerStruct) {
+        this.eventSpeakerMapper = eventSpeakerMapper;
+        this.eventSpeakerStruct = eventSpeakerStruct;
+    }
 
     @Override
     public List<EventSpeakerDto> getSpeakersByEventId(int id) {
@@ -35,6 +42,11 @@ public class EventSpeakerService implements IEventSpeakerService {
 
     @Override
     public void remove(int speakerId, int eventId) {
+        eventSpeakerMapper.resurrect( speakerId, eventId);
+    }
 
+    @Override
+    public void resurrect(int speakerId, int eventId) {
+        eventSpeakerMapper.resurrect( speakerId, eventId);
     }
 }

@@ -36,4 +36,9 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
         conferenceOrganizerMapper.delete(organizerId,conferenceId);
     }
 
+    @Override
+    public void resurrect(int organizerId, int conferenceId) {
+        conferenceOrganizerMapper.resurrect(organizerId,conferenceId);
+    }
+
 }

@@ -14,4 +14,6 @@ public interface IEventSpeakerService {
 
     void remove(int speakerId, int eventId);
 
+    void resurrect(int speakerId, int eventId);
+
 }

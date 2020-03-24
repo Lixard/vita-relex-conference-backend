@@ -11,5 +11,7 @@ public interface IEventVisitorService {
 
     EventVisitorDto create(EventVisitorDto eventVisitorDto);
 
-    EventVisitorDto update(EventVisitorDto eventVisitorDto);
+    void remove(int userId, int eventId);
+
+    void resurrect(int userId, int eventId);
 }

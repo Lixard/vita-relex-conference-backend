@@ -18,6 +18,7 @@ import java.util.List;
 /**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
  * на post, delet или put)
 Пока что непонятно как это будет с фронта, пока так**/
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(
         path = "/users",

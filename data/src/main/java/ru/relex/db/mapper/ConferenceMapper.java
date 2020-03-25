@@ -61,6 +61,7 @@ public interface ConferenceMapper {
     )
     void update(Conference conference);
 
+
     @Update(
             //language=PostgreSQL
             "UPDATE conferences SET deleted = 'true' WHERE conference_id = #{id}"

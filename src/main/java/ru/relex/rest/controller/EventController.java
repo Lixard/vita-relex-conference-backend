@@ -13,6 +13,10 @@ import ru.relex.services.service.IEventVisitorService;
 
 import java.util.List;
 
+/**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
+ * на post, delet или put)
+ Пока что непонятно как это будет с фронта, пока так**/
+
 @RestController
 @RequestMapping(
         path = "/events",
@@ -66,6 +70,27 @@ public class EventController {
     @PostMapping(path = "/subscribe", consumes = MediaType.APPLICATION_JSON_VALUE)
     void subscribeOnEvent(@RequestBody EventVisitorDto visitor) {
         eventVisitorService.subscribeOnEvent(visitor);
+    }
+
+    @PatchMapping("/{id}/deleted")
+    void remove(@PathVariable("id") int id) {
+        eventService.remove(id);
+    }
+
+    @PatchMapping("/{id}/resurrect")
+    void resurrect(@PathVariable("id") int id) {
+        eventService.resurrect(id);
+    }
+
+
+    @PatchMapping(path = "/{eventId}/users/{userId}/delete")
+    void removeSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
+        eventSpeakerService.remove(eventId,userId);
+    }
+
+    @PatchMapping(path = "/{eventId}/users/{userId}/resurrect")
+    void resurrectSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
+        eventSpeakerService.resurrect(eventId,userId);
     }
 
 }

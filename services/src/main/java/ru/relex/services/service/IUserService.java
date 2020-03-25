@@ -14,5 +14,7 @@ public interface IUserService {
 
     UserDto update(@Valid UserDto userDto);
 
+    void resurrect(int userId);
+
     void remove(int userId);
 }

@@ -16,6 +16,8 @@ public interface IEventService {
 
     List<EventDto> getEventsByConferenceId( int conferenceId);
 
+    void resurrect(int eventId);
+
     void remove(int eventId);
 
 }

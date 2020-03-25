@@ -15,6 +15,9 @@ import ru.relex.services.service.IUserService;
 
 import java.util.List;
 
+/**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
+ * на post, delet или put)
+Пока что непонятно как это будет с фронта, пока так**/
 @RestController
 @RequestMapping(
         path = "/users",
@@ -83,4 +86,23 @@ public class UserController {
         eventSpeakerService.assignToEvent(speaker);
     }
 
+    @PatchMapping("/{id}/deleted")
+    void removeUser(@PathVariable("id") int id) {
+        userService.remove(id);
+    }
+
+    @PatchMapping("/{id}/resurrect")
+    void resurrectUser(@PathVariable("id") int id) {
+        userService.resurrect(id);
+    }
+
+    @PatchMapping(path = "/{userId}/events{eventId}/delete")
+    void removeSubscriber(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
+        eventVisitorService.remove(eventId,userId);
+    }
+
+    @PatchMapping(path = "/{userId}/events{eventId}/resurrect")
+    void resurrectSubscriber(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
+        eventVisitorService.resurrect(eventId,userId);
+    }
 }

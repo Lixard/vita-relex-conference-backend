@@ -14,5 +14,7 @@ public interface IConferenceService {
 
     ConferenceDto update(@Valid ConferenceDto conferenceDto);
 
+    void resurrect(int conferenceId);
+
     void remove(int conferenceId);
 }

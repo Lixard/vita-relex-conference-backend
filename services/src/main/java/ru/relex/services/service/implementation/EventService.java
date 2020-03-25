@@ -3,6 +3,8 @@ package ru.relex.services.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.db.mapper.EventMapper;
+import ru.relex.db.mapper.EventSpeakerMapper;
+import ru.relex.db.mapper.EventVisitorMapper;
 import ru.relex.db.model.Event;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.mapstruct.EventStruct;
@@ -15,12 +17,17 @@ import java.util.List;
 public class EventService implements IEventService {
     private EventMapper eventMapper;
     private EventStruct eventStruct;
+    private EventVisitorMapper eventVisitorMapper;
+    private EventSpeakerMapper eventSpeakerMapper;
 
-    @Autowired
-    public EventService(EventMapper eventMapper, EventStruct eventStruct) {
+    public EventService(EventMapper eventMapper, EventStruct eventStruct, EventVisitorMapper eventVisitorMapper, EventSpeakerMapper eventSpeakerMapper) {
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
+        this.eventVisitorMapper = eventVisitorMapper;
+        this.eventSpeakerMapper = eventSpeakerMapper;
     }
+
+    @Autowired
 
     @Override
     public List<EventDto> getEvents() {
@@ -56,7 +63,16 @@ public class EventService implements IEventService {
     @Override
     public void remove(int eventId) {
         eventMapper.delete(eventId);
+        eventSpeakerMapper.deleteByEventId(eventId);
+        eventVisitorMapper.deleteByEventId(eventId);
+
     }
 
+    @Override
+    public void resurrect(int eventId) {
+        eventMapper.resurrect(eventId);
+        eventSpeakerMapper.resurrectByEventId(eventId);
+        eventVisitorMapper.resurrectByEventId(eventId);
+    }
 
 }

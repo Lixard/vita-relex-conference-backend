@@ -15,6 +15,11 @@ import ru.relex.services.service.IEventService;
 
 import java.util.List;
 
+
+/**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
+ * на post, delet или put)
+ Пока что непонятно как это будет с фронта, пока так**/
+
 @RestController
 @RequestMapping(
         path = "/conferences",
@@ -61,6 +66,26 @@ public class ConferenceController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ConferenceDto create(@RequestBody ConferenceDto conference) {
         return conferenceService.create(conference);
+    }
+
+    @PatchMapping("/{id}/deleted")
+    void remove(@PathVariable("id") int id) {
+        conferenceService.remove(id);
+    }
+
+    @PatchMapping("/{id}/resurrect")
+    void resurrect(@PathVariable("id") int id) {
+        conferenceService.resurrect(id);
+    }
+
+    @PatchMapping(path = "/{conferenceId}/users/{userId}/delete")
+    void removeOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
+        conferenceOrganizersService.remove(conferenceId,userId);
+    }
+
+    @PatchMapping(path = "/{conferenceId}/users/{userId}/resurrect")
+    void resurrectOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
+        conferenceOrganizersService.resurrect(conferenceId,userId);
     }
 
 }

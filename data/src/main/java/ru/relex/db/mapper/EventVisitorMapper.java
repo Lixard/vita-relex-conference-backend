@@ -29,6 +29,20 @@ public interface EventVisitorMapper {
     )
     void delete(@Param("userId") int userId, @Param("eventId") int eventId);
 
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'true' " +
+                    "WHERE event_id = #{eventId}"
+    )
+    void deleteByEventId(@Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'true' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void deleteByUserId(@Param("userId") int userId);
+
     @Insert(
             //language=PostgreSQL
             "INSERT INTO event_visitors(user_id, event_id) " +
@@ -42,4 +56,18 @@ public interface EventVisitorMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'false' " +
+                    "WHERE event_id = #{eventId}"
+    )
+    void resurrectByEventId(@Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_visitors SET deleted = 'false' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void resurrectByUserId(@Param("userId") int userId);
 }

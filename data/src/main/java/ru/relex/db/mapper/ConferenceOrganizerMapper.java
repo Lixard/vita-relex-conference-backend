@@ -45,6 +45,20 @@ public interface ConferenceOrganizerMapper {
     )
     void delete(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
 
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET deleted = 'true' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void deleteBytUserId(@Param("userId") int userId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET deleted = 'true' " +
+                    "WHERE conference_id = #{conferenceId}"
+    )
+    void deleteByConferenceId(@Param("conferenceId") int conferenceId);
+
     @Insert(
             //language=PostgreSQL
             "INSERT INTO conference_organizers(user_id, conference_id, " +
@@ -59,4 +73,18 @@ public interface ConferenceOrganizerMapper {
             "WHERE user_id = #{userId} AND conference_id = #{conferenceId}"
     )
     void resurrect(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET deleted = 'false' " +
+                    "WHERE conference_id = #{conferenceId}"
+    )
+    void resurrectByConferenceId(@Param("conferenceId") int conferenceId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET deleted = 'false' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void resurrectBytUserId(@Param("userId") int userId);
 }

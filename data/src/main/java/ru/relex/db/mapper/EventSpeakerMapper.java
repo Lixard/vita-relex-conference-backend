@@ -38,6 +38,20 @@ public interface EventSpeakerMapper {
     )
     void delete(@Param("userId") int userId, @Param("eventId") int eventId);
 
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET deleted = 'true' " +
+                    "WHERE event_id = #{eventId}"
+    )
+    void deleteByEventId(@Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET deleted = 'true' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void deleteByUserId(@Param("userId") int userId);
+
     @Insert(
             //language=PostgreSQL
             "INSERT INTO event_speakers(user_id, event_id, " +
@@ -52,4 +66,18 @@ public interface EventSpeakerMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET deleted = 'false' " +
+                    "WHERE event_id = #{eventId}"
+    )
+    void resurrectByEventId(@Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET deleted = 'false' " +
+                    "WHERE user_id = #{userId}"
+    )
+    void resurrectByUserId(@Param("eventId") int userId);
 }

@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "9a32fdb4-a302-496e-8783-0153c50bd435",
+		"name": "GET Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/events",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all conferences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/conferences",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"conferences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users/15",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get conference by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/conferences/2",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"conferences",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get event by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/events/11",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"events",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get schedule",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users/15/schedule",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users",
+						"15",
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all conferences of user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users/12/conferences",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users",
+						"12",
+						"conferences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all events of speaker",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users/16/events",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users",
+						"16",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all events of conference",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/conferences/1/events",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"conferences",
+						"1",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all organizers of conference",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/organizers",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"conferences",
+						"2",
+						"organizers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users of event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/events/11/users",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"events",
+						"11",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all speakers of event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/events/11/speakers",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"events",
+						"11",
+						"speakers"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

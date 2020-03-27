@@ -1,0 +1,1130 @@
+{
+	"info": {
+		"_postman_id": "54ad0179-674d-4bb3-908c-8bebc750d9e9",
+		"name": "POST Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create users",
+			"item": [
+				{
+					"name": "Create User 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"MOrlov\",\r\n\t\"password\": \"nd=3U44p\",\r\n\t\"role\": \"ADMIN\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Михаил\",\r\n\t\t\"lastName\": \"Орлов\",\r\n\t\t\"email\": \"MOrlov@gmail.com\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Litvinushka\",\r\n\t\"password\": \"MNZqWm31\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Надежда\",\r\n\t\t\"lastName\": \"Литвин\",\r\n\t\t\"email\": \"Litvin134@gmail.com\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Migor\",\r\n\t\"password\": \"RnJnIz3D\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Игорь\",\r\n\t\t\"lastName\": \"Тихонов\",\r\n\t\t\"email\": \"Ig0r@yandex.ru\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Yakimov\",\r\n\t\"password\": \"X7hEItGH\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Анатолий\",\r\n\t\t\"lastName\": \"Якимов\",\r\n\t\t\"email\": \"YakimovA21@yandex.ru\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Reksoft\",\r\n\t\"password\": \"332tVbO0=\",\r\n\t\"role\": \"COMPANY_ACCOUNT\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Артем\",\r\n\t\t\"lastName\": \"Сушков\",\r\n\t\t\"email\": \"Reksoft@gmail.com\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 6",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Anastas\",\r\n\t\"password\": \"QDv4RgNc\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Анастасия\",\r\n\t\t\"lastName\": \"Переславцева\",\r\n\t\t\"email\": \"Anastasss@yandex.ru\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 7",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"Migor\",\r\n\t\"password\": \"RnJnIz3D\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Игорь\",\r\n\t\t\"lastName\": \"Тихонов\",\r\n\t\t\"email\": \"Ig0r@yandex.ru\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User 8",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"AllaTkach\",\r\n\t\"password\": \"LNgxekWE9\",\r\n\t\"role\": \"USER\",\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Алла\",\r\n\t\t\"lastName\": \"Ткачева\",\r\n\t\t\"email\": \"AllaTkach@gmail.com\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Create events",
+			"item": [
+				{
+					"name": "Create event 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"eventName\": \"Shared Design\",\r\n\t\"eventType\": \"SEMINAR\",\r\n\t\"conferenceId\": \"1\",\r\n\t\"details\": {\r\n\t\t\"timeStart\": \"2020-04-05T12:00:00\",\r\n\t\t\"timeEnd\": \"2020-04-05T15:00:00\",\r\n\t\t\"location\": \"4 зал\",\r\n\t\t\"htmlDescription\": \"Продуктовый дизайн в самом сильном его проявлении\",\r\n\t\t\"createdBy\": \"13\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create event 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"eventName\": \"Дизайн-хакатон\",\r\n\t\"eventType\": \"ENTERTAINING_EVENT\",\r\n\t\"conferenceId\": \"1\",\r\n\t\"details\": {\r\n\t\t\"timeStart\": \"2020-04-07T11:00:00\",\r\n\t\t\"timeEnd\": \"2020-04-07T13:30:00\",\r\n\t\t\"location\": \"4 зал\",\r\n\t\t\"htmlDescription\": \"Дизайн-хакатон — это два часа убойной практики и ничего более. \",\r\n\t\t\"createdBy\": \"13\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create event 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"eventName\": \"Load Testing\",\r\n\t\"eventType\": \"MEETUP\",\r\n\t\"conferenceId\": \"2\",\r\n\t\"details\": {\r\n\t\t\"timeStart\": \"2020-05-14T16:00:00\",\r\n\t\t\"timeEnd\": \"2020-05-14T18:00:00\",\r\n\t\t\"location\": \"3 зал\",\r\n\t\t\"htmlDescription\": \"Как экономить деньги на проекте при хорошем нагрузочном тестировании\",\r\n\t\t\"createdBy\": \"13\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Create conferences",
+			"item": [
+				{
+					"name": "Create conference 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"conferenceName\": \"Design&UI\",\r\n\t\"owner\": \"13\",\r\n\t\"details\": {\r\n\t\t\"htmlDescription\": \"Митапы про дизайн и не только\",\r\n\t\t\"location\": \"1 зал\",\r\n\t\t\"dateStart\": \"2020-04-05T12:00:00\",\r\n\t\t\"dateEnd\": \"2020-04-20T18:00:00\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create conference 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"conferenceName\": \"QA\",\r\n\t\"owner\": \"13\",\r\n\t\"details\": {\r\n\t\t\"htmlDescription\": \"Новые техники тест-дизайна\",\r\n\t\t\"location\": \"3 зал\",\r\n\t\t\"dateStart\": \"2020-05-14T12:00:00\",\r\n\t\t\"dateEnd\": \"2020-05-21T20:00:00\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Assign speaker",
+			"item": [
+				{
+					"name": "Assign Speaker 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"16\",\r\n\t\"eventId\": \"10\",\r\n\t\"createdBy\": \"15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/assign/event",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"assign",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Speaker 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"10\",\r\n\t\"eventId\": \"11\",\r\n\t\"createdBy\": \"15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/assign/event",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"assign",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Speaker 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"16\",\r\n\t\"eventId\": \"10\",\r\n\t\"createdBy\": \"15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/assign/event",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"assign",
+								"event"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Assign organizer",
+			"item": [
+				{
+					"name": "Assign organizer 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"15\",\r\n\t\"conferenceId\": \"1\",\r\n\t\"createdBy\": \"13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/assign/conference",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"assign",
+								"conference"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign organizer 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"12\",\r\n\t\"conferenceId\": \"2\",\r\n\t\"createdBy\": \"13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/assign/conference",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"assign",
+								"conference"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subscribers",
+			"item": [
+				{
+					"name": "Subscriber 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"10\",\r\n\t\"eventId\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"11\",\r\n\t\"eventId\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"12\",\r\n\t\"eventId\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"14\",\r\n\t\"eventId\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"15\",\r\n\t\"eventId\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 6",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"15\",\r\n\t\"eventId\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 7",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"16\",\r\n\t\"eventId\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriber 8",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3847cd50-9daf-4189-953a-fe9cf9c90163",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\": \"15\",\r\n\t\"eventId\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/subscribe",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

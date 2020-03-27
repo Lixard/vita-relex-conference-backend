@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "abdecd40-eea7-42d2-83fa-74d6404c7ba0",
+		"name": "PUT Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Edit user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"MigorTihonov\",\r\n\t\"password\": \"RnJnIz3D1\",\r\n\t\"role\": \"USER\",\r\n\t\"deleted\":false,\r\n\t\"personalInfo\": {\r\n\t\t\"firstName\": \"Игорь\",\r\n\t\t\"lastName\": \"Тихонов\",\r\n\t\t\"email\": \"Ig0r@yandex.ru\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/users/11",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"users",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit event",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"eventName\": \"Shared Design\",\r\n\t\"eventType\": \"MEETUP\",\r\n\t\"conferenceId\": \"1\",\r\n\t\"details\": {\r\n\t\t\"timeStart\": \"2020-04-05T12:00:00\",\r\n\t\t\"timeEnd\": \"2020-04-05T15:00:00\",\r\n\t\t\"location\": \"2 зал\",\r\n\t\t\"htmlDescription\": \"Продуктовый дизайн в самом сильном его проявлении\",\r\n\t\t\"createdBy\": \"13\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/events/10",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"events",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit conference",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"conferenceName\": \"Design\",\r\n\t\"owner\": \"13\",\r\n\t\"details\": {\r\n\t\t\"htmlDescription\": \"Митапы про дизайн и не только\",\r\n\t\t\"location\": \"1 зал\",\r\n\t\t\"dateStart\": \"2020-04-05T12:00:00\",\r\n\t\t\"dateEnd\": \"2020-04-20T18:00:00\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/conferences/1",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"conferences",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

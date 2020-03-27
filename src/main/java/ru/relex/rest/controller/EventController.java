@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.shedule.EventVisitorDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
+import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IEventService;
 import ru.relex.services.service.IEventSpeakerService;
 import ru.relex.services.service.IEventVisitorService;
@@ -44,12 +45,12 @@ public class EventController {
     }
 
     @GetMapping("/{id}/speakers")
-    List<EventSpeakerDto> getSpeakerByEventId(@PathVariable("id") int id) {
+    List<UserDto> getSpeakerByEventId(@PathVariable("id") int id) {
         return eventSpeakerService.getSpeakersByEventId(id);
     }
 
     @GetMapping("/{id}/users")
-    List<EventVisitorDto> getVisitorsByEventId(@PathVariable("id") int id) {
+    List<UserDto> getVisitorsByEventId(@PathVariable("id") int id) {
         return eventVisitorService.getVisitorsByEventId(id);
     }
 

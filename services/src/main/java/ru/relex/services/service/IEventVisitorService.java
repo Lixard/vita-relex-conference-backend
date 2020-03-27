@@ -1,14 +1,16 @@
 package ru.relex.services.service;
 
+import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.shedule.EventVisitorDto;
+import ru.relex.services.dto.user.UserDto;
 
 import javax.validation.Valid;
 import java.util.List;
 
 public interface IEventVisitorService {
-    List<EventVisitorDto> getScheduleOfUser(int id);
+    List<EventDto> getScheduleOfUser(int id);
 
-    List<EventVisitorDto> getVisitorsByEventId(int id);
+    List<UserDto> getVisitorsByEventId(int id);
 
     void subscribeOnEvent(@Valid EventVisitorDto eventVisitorDto);
 

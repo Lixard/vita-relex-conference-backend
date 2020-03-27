@@ -92,7 +92,7 @@ public interface EventMapper {
             "INSERT INTO events " +
             "(event_name, event_type, conference_id, html_description, " +
             "location, time_start, time_end, created_by) " +
-            "VALUES (#{eventName}, #{eventType}, #{conferenceId}, #{html_description}, #{location}, " +
+            "VALUES (#{eventName}, #{eventType}, #{conferenceId}, #{htmlDescription}, #{location}, " +
             "#{timeStart}, #{timeEnd}, #{createdBy})"
     )
     @SelectKey(

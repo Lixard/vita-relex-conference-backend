@@ -1,14 +1,16 @@
 package ru.relex.services.service;
 
+import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
+import ru.relex.services.dto.user.UserDto;
 
 import javax.validation.Valid;
 import java.util.List;
 public interface IConferenceOrganizerService {
 
-        List<ConferenceOrganizerDto> getOrganizersByConferenceId(int id);
+        List<UserDto> getOrganizersByConferenceId(int id);
 
-        List<ConferenceOrganizerDto> getConferencesByOrganizerId(int id);
+        List<ConferenceDto> getConferencesByOrganizerId(int id);
 
         void assignToConference(@Valid ConferenceOrganizerDto conferenceOrganizerDto);
 

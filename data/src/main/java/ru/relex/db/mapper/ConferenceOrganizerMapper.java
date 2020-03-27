@@ -20,7 +20,7 @@ public interface ConferenceOrganizerMapper {
             "FROM conference_organizers WHERE NOT deleted " +
             "AND user_id = #{userId}"
     )
-    List<ConferenceOrganizer> getConferencesByUserId(@Param("userId") int userId);
+    List<ConferenceOrganizer> getConferencesByOrganizerId(@Param("userId") int userId);
 
     @Select(
             //language=PostgreSQL

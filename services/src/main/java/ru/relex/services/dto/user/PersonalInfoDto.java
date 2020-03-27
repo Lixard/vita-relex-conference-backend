@@ -13,7 +13,7 @@ public class PersonalInfoDto {
     @Size(max = 50, message = Field.FIRST_NAME + Constraint.TOO_LONG)
     private String firstName;
 
-    @NotBlank(message = Field.FIRST_NAME + Constraint.IS_EMPTY)
+    @NotBlank(message = Field.LAST_NAME + Constraint.IS_EMPTY)
     @Size(max = 50, message = Field.LAST_NAME + Constraint.TOO_LONG)
     private String lastName;
 

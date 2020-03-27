@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.relex.services.dto.conference.ConferenceDto;
+import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.shedule.EventVisitorDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
@@ -47,18 +49,18 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @GetMapping("/{id}/conference")
-    List<ConferenceOrganizerDto> getConferencesByUserId(@PathVariable("id") int id) {
+    @GetMapping("/{id}/conferences")
+    List<ConferenceDto> getConferencesByUserId(@PathVariable("id") int id) {
         return conferenceOrganizerService.getConferencesByOrganizerId(id);
     }
 
     @GetMapping("/{id}/schedule")
-    List<EventVisitorDto> getScheduleOfUser(@PathVariable("id") int id) {
+    List<EventDto> getScheduleOfUser(@PathVariable("id") int id) {
         return eventVisitorService.getScheduleOfUser(id);
     }
 
     @GetMapping("/{id}/events")
-    List<EventSpeakerDto> getEventsBySpeakerId(@PathVariable("id") int id) {
+    List<EventDto> getEventsBySpeakerId(@PathVariable("id") int id) {
         return eventSpeakerService.getEventsBySpeakerId(id);
     }
 

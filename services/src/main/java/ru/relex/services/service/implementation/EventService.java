@@ -20,6 +20,7 @@ public class EventService implements IEventService {
     private EventVisitorMapper eventVisitorMapper;
     private EventSpeakerMapper eventSpeakerMapper;
 
+    @Autowired
     public EventService(EventMapper eventMapper, EventStruct eventStruct, EventVisitorMapper eventVisitorMapper, EventSpeakerMapper eventSpeakerMapper) {
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
@@ -27,7 +28,6 @@ public class EventService implements IEventService {
         this.eventSpeakerMapper = eventSpeakerMapper;
     }
 
-    @Autowired
 
     @Override
     public List<EventDto> getEvents() {

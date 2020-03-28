@@ -64,12 +64,12 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     }
 
     @Override
-    public void remove(int organizerId, int conferenceId) {
+    public void remove(int conferenceId, int organizerId) {
         conferenceOrganizerMapper.delete(organizerId,conferenceId);
     }
 
     @Override
-    public void resurrect(int organizerId, int conferenceId) {
+    public void resurrect(int conferenceId,int organizerId) {
         conferenceOrganizerMapper.resurrect(organizerId,conferenceId);
     }
 

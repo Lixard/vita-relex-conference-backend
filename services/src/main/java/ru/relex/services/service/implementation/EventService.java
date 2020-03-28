@@ -2,6 +2,7 @@ package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.EventMapper;
 import ru.relex.db.mapper.EventSpeakerMapper;
 import ru.relex.db.mapper.EventVisitorMapper;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Service
+@Validated
 public class EventService implements IEventService {
     private EventMapper eventMapper;
     private EventStruct eventStruct;

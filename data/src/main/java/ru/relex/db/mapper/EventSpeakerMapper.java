@@ -10,24 +10,34 @@ public interface EventSpeakerMapper {
 
     @Select(
             //language=PostgreSQL
-            "SELECT user_id, event_id, created_by, created_at, deleted " +
-            "FROM event_speakers WHERE NOT deleted "+
-                    "AND user_id = #{userId}"
+            "SELECT es.user_id, es.event_id, es.created_by, es.created_at, es.deleted " +
+            "FROM event_speakers es " +
+            "JOIN users u ON es.user_id = u.user_id " +
+            "JOIN events e ON es.event_id = e.event_id " +
+            "WHERE NOT (es.deleted OR u.deleted OR e.deleted) "+
+            "AND es.user_id = #{userId}"
     )
     List<EventSpeaker> getEventsBySpeakerId(@Param("userId") int userId);
+
     @Select(
             //language=PostgreSQL
-            "SELECT  user_id, event_id, created_by, created_at, deleted " +
-                    "FROM event_speakers WHERE NOT deleted " +
-            "AND event_id = #{eventId}"
+            "SELECT es.user_id, es.event_id, es.created_by, es.created_at, es.deleted " +
+            "FROM event_speakers es " +
+            "JOIN users u ON es.user_id = u.user_id " +
+            "JOIN events e ON es.event_id = e.event_id " +
+            "WHERE NOT (es.deleted OR u.deleted OR e.deleted) "+
+            "AND es.event_id = #{eventId}"
     )
     List<EventSpeaker> getSpeakersByEventId(@Param("eventId") int eventId);
 
     @Select(
             //language=PostgreSQL
-            "SELECT user_id, event_id, created_by, created_at, deleted " +
-            "FROM event_speakers " +
-            "WHERE user_id = #{userId} AND event_id = #{eventId} AND NOT deleted "
+            "SELECT es.user_id, es.event_id, es.created_by, es.created_at, es.deleted " +
+            "FROM event_speakers es " +
+            "JOIN users u ON es.user_id = u.user_id " +
+            "JOIN events e ON es.event_id = e.event_id " +
+            "WHERE NOT (es.deleted OR u.deleted OR e.deleted) "+
+            "AND es.user_id = #{userId} AND es.event_id = #{eventId}"
     )
     EventSpeaker findById(@Param("userId") int userId, @Param("eventId") int eventId);
 
@@ -37,20 +47,6 @@ public interface EventSpeakerMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void delete(@Param("userId") int userId, @Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_speakers SET deleted = 'true' " +
-                    "WHERE event_id = #{eventId}"
-    )
-    void deleteByEventId(@Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_speakers SET deleted = 'true' " +
-                    "WHERE user_id = #{userId}"
-    )
-    void deleteByUserId(@Param("userId") int userId);
 
     @Insert(
             //language=PostgreSQL
@@ -66,18 +62,4 @@ public interface EventSpeakerMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_speakers SET deleted = 'false' " +
-                    "WHERE event_id = #{eventId}"
-    )
-    void resurrectByEventId(@Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_speakers SET deleted = 'false' " +
-                    "WHERE user_id = #{userId}"
-    )
-    void resurrectByUserId(@Param("eventId") int userId);
 }

@@ -17,52 +17,56 @@ public interface EventMapper {
     @Select(
             //language=PostgreSQL
             "SELECT " +
-            "event_id, " +
-            "event_name, " +
-            "event_type, " +
-            "conference_id, " +
-            "html_description, " +
-            "location, " +
-            "time_start, " +
-            "time_end, " +
-            "created_by, " +
-            "deleted " +
-            "FROM events WHERE NOT deleted"
+            "e.event_id, " +
+            "e.event_name, " +
+            "e.event_type, " +
+            "e.conference_id, " +
+            "e.html_description, " +
+            "e.location, " +
+            "e.time_start, " +
+            "e.time_end, " +
+            "e.created_by, " +
+            "e.deleted " +
+            "FROM events e " +
+            "JOIN conferences c ON e.conference_id = c.conference_id " +
+            "WHERE NOT (e.deleted OR c.deleted)"
     )
     List<Event> getEvents();
 
     @Select(
             //language=PostgreSQL
             "SELECT " +
-                    "event_id, " +
-                    "event_name, " +
-                    "event_type, " +
-                    "conference_id, " +
-                    "html_description, " +
-                    "location, " +
-                    "time_start, " +
-                    "time_end, " +
-                    "created_by, " +
-                    "deleted " +
-                    "FROM events " +
-                    "WHERE conference_id = #{conference_id} AND NOT deleted"
+            "e.event_id, " +
+            "e.event_name, " +
+            "e.event_type, " +
+            "e.conference_id, " +
+            "e.html_description, " +
+            "e.location, " +
+            "e.time_start, " +
+            "e.time_end, " +
+            "e.created_by, " +
+            "e.deleted " +
+            "FROM events e " +
+            "JOIN conferences c ON e.conference_id = c.conference_id " +
+            "WHERE NOT (e.deleted OR c.deleted) AND e.conference_id = #{conferenceId}"
     )
-    List<Event> getEventsByConferenceId(int conference_id);
+    List<Event> getEventsByConferenceId(@Param("conferenceId") int conference_id);
     @Select(
             //language=PostgreSQL
             "SELECT " +
-            "event_id, " +
-            "event_name, " +
-            "event_type, " +
-            "conference_id, " +
-            "html_description, " +
-            "location, " +
-            "time_start, " +
-            "time_end, " +
-            "created_by, " +
-            "deleted " +
-            "FROM events " +
-            "WHERE event_id = #{id} AND NOT deleted"
+            "e.event_id, " +
+            "e.event_name, " +
+            "e.event_type, " +
+            "e.conference_id, " +
+            "e.html_description, " +
+            "e.location, " +
+            "e.time_start, " +
+            "e.time_end, " +
+            "e.created_by, " +
+            "e.deleted " +
+            "FROM events e " +
+            "JOIN conferences c ON e.conference_id = c.conference_id " +
+            "WHERE NOT (e.deleted OR c.deleted) AND e.event_id = #{id}"
     )
     Event findById(@Param("id") int id);
 

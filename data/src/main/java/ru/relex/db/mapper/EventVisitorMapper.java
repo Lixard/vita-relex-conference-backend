@@ -9,16 +9,26 @@ import ru.relex.db.model.EventVisitor;
 import java.util.List;
 
 public interface EventVisitorMapper {
+
     @Select(
             //language=PostgreSQL
-            "SELECT user_id, event_id, deleted " +
-            "FROM event_visitors WHERE event_id = #{eventId} AND NOT deleted"
+            "SELECT ev.user_id, ev.event_id, ev.deleted " +
+            "FROM event_visitors ev " +
+            "JOIN users u ON ev.user_id = u.user_id " +
+            "JOIN events e ON ev.event_id = e.event_id " +
+            "WHERE NOT (ev.deleted OR u.deleted OR e.deleted) " +
+            "AND ev.event_id = #{eventId}"
     )
     List<EventVisitor> getVisitorsByEventId(@Param("eventId") int eventId);
+
     @Select(
             //language=PostgreSQL
-            "SELECT user_id, event_id, deleted " +
-            "FROM event_visitors WHERE user_id = #{visitorId} AND NOT deleted"
+            "SELECT ev.user_id, ev.event_id, ev.deleted " +
+            "FROM event_visitors ev " +
+            "JOIN users u ON ev.user_id = u.user_id " +
+            "JOIN events e ON ev.event_id = e.event_id " +
+            "WHERE NOT (ev.deleted OR u.deleted OR e.deleted) " +
+            "AND ev.user_id = #{visitorId}"
     )
     List<EventVisitor> getScheduleOfUser(@Param("visitorId") int visitorId);
 
@@ -28,20 +38,6 @@ public interface EventVisitorMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void delete(@Param("userId") int userId, @Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_visitors SET deleted = 'true' " +
-                    "WHERE event_id = #{eventId}"
-    )
-    void deleteByEventId(@Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_visitors SET deleted = 'true' " +
-                    "WHERE user_id = #{userId}"
-    )
-    void deleteByUserId(@Param("userId") int userId);
 
     @Insert(
             //language=PostgreSQL
@@ -56,18 +52,4 @@ public interface EventVisitorMapper {
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void resurrect(@Param("userId") int userId, @Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_visitors SET deleted = 'false' " +
-                    "WHERE event_id = #{eventId}"
-    )
-    void resurrectByEventId(@Param("eventId") int eventId);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE event_visitors SET deleted = 'false' " +
-                    "WHERE user_id = #{userId}"
-    )
-    void resurrectByUserId(@Param("userId") int userId);
 }

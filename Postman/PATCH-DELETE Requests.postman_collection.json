@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "f26e5cff-73ad-4e30-bfc3-f9c5057fd1f0",
+		"name": "PATCH/DELETE Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ConferenceOrganizers",
+			"item": [
+				{
+					"name": "select organizers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "35d35bc0-7f30-40ac-909e-2f45ea40d7bd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/organizers",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences",
+								"2",
+								"organizers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete organizer from conference",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/organizers/12/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences",
+								"2",
+								"organizers",
+								"12",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect organizer to conference",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/organizers/12/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences",
+								"2",
+								"organizers",
+								"12",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete conference",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences",
+								"2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect conference",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/conferences/2/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"conferences",
+								"2",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "17498f9f-fdc4-4639-9f74-7ed6d6f08902",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/12/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"12",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/12/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"12",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f7344f96-8a95-4847-9826-f25f86a7114d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9dae0465-72b9-47ff-8030-785126e46bcb",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EventSpeaker",
+			"item": [
+				{
+					"name": "get speakers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/speakers",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"speakers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect event",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete speaker from event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/speakers/16/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"speakers",
+								"16",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect speaker from event",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/speakers/16/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"speakers",
+								"16",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/16/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"16",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resurrect user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/16/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"16",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EventVisitors",
+			"item": [
+				{
+					"name": "get visitors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/events/2/users",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"events",
+								"2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsubscribe from event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/10/schedule/2/delete",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"10",
+								"schedule",
+								"2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ressurect subscribe to event",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{Serverhost}}:{{Serverport}}/users/10/schedule/2/resurrect",
+							"host": [
+								"{{Serverhost}}"
+							],
+							"port": "{{Serverport}}",
+							"path": [
+								"users",
+								"10",
+								"schedule",
+								"2",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0008b3ab-4cc3-464d-a9a3-befdef690202",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6a2ba282-a5de-46a1-8a27-0947f3af175e",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "27e5a26d-30e9-4298-8964-cb3c149a0cac",
+			"key": "Serverhost",
+			"value": "127.0.0.1",
+			"type": "string"
+		},
+		{
+			"id": "0d8a4ecb-b1fe-466d-ba8b-2f2e5c1fc218",
+			"key": "Serverport",
+			"value": "8080",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

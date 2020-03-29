@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
-import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceService;
@@ -69,7 +68,7 @@ public class ConferenceController {
         return conferenceService.create(conference);
     }
 
-    @PatchMapping("/{id}/deleted")
+    @DeleteMapping("/{id}/delete")
     void remove(@PathVariable("id") int id) {
         conferenceService.remove(id);
     }
@@ -79,12 +78,12 @@ public class ConferenceController {
         conferenceService.resurrect(id);
     }
 
-    @PatchMapping(path = "/{conferenceId}/users/{userId}/delete")
+    @DeleteMapping("/{conferenceId}/organizers/{userId}/delete")
     void removeOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
         conferenceOrganizersService.remove(conferenceId,userId);
     }
 
-    @PatchMapping(path = "/{conferenceId}/users/{userId}/resurrect")
+    @PatchMapping("/{conferenceId}/organizers/{userId}/resurrect")
     void resurrectOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
         conferenceOrganizersService.resurrect(conferenceId,userId);
     }

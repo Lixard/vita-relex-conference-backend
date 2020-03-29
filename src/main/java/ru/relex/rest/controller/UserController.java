@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
-import ru.relex.services.dto.shedule.EventVisitorDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
@@ -89,7 +88,7 @@ public class UserController {
         eventSpeakerService.assignToEvent(speaker);
     }
 
-    @PatchMapping("/{id}/deleted")
+    @DeleteMapping("/{id}/delete")
     void removeUser(@PathVariable("id") int id) {
         userService.remove(id);
     }
@@ -99,13 +98,13 @@ public class UserController {
         userService.resurrect(id);
     }
 
-    @PatchMapping(path = "/{userId}/events{eventId}/delete")
-    void removeSubscriber(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
-        eventVisitorService.remove(eventId,userId);
+    @DeleteMapping("/{userId}/schedule/{eventId}/delete")
+    void removeSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {
+        eventVisitorService.remove(userId, eventId);
     }
 
-    @PatchMapping(path = "/{userId}/events{eventId}/resurrect")
-    void resurrectSubscriber(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
-        eventVisitorService.resurrect(eventId,userId);
+    @PatchMapping("/{userId}/schedule/{eventId}/resurrect")
+    void resurrectSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {
+        eventVisitorService.resurrect(userId, eventId);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.shedule.EventVisitorDto;
-import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IEventService;
 import ru.relex.services.service.IEventSpeakerService;
@@ -73,7 +72,7 @@ public class EventController {
         eventVisitorService.subscribeOnEvent(visitor);
     }
 
-    @PatchMapping("/{id}/deleted")
+    @DeleteMapping("/{id}/delete")
     void remove(@PathVariable("id") int id) {
         eventService.remove(id);
     }
@@ -84,14 +83,14 @@ public class EventController {
     }
 
 
-    @PatchMapping(path = "/{eventId}/users/{userId}/delete")
+    @DeleteMapping("/{eventId}/speakers/{userId}/delete")
     void removeSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
-        eventSpeakerService.remove(eventId,userId);
+        eventSpeakerService.remove(userId, eventId);
     }
 
-    @PatchMapping(path = "/{eventId}/users/{userId}/resurrect")
+    @PatchMapping("/{eventId}/speakers/{userId}/resurrect")
     void resurrectSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
-        eventSpeakerService.resurrect(eventId,userId);
+        eventSpeakerService.resurrect(userId, eventId);
     }
 
 }

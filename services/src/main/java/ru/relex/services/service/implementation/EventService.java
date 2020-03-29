@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.EventMapper;
-import ru.relex.db.mapper.EventSpeakerMapper;
-import ru.relex.db.mapper.EventVisitorMapper;
 import ru.relex.db.model.Event;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.mapstruct.EventStruct;
@@ -19,28 +17,22 @@ import java.util.List;
 public class EventService implements IEventService {
     private EventMapper eventMapper;
     private EventStruct eventStruct;
-    private EventVisitorMapper eventVisitorMapper;
-    private EventSpeakerMapper eventSpeakerMapper;
 
     @Autowired
-    public EventService(EventMapper eventMapper, EventStruct eventStruct, EventVisitorMapper eventVisitorMapper, EventSpeakerMapper eventSpeakerMapper) {
+    public EventService(EventMapper eventMapper, EventStruct eventStruct) {
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
-        this.eventVisitorMapper = eventVisitorMapper;
-        this.eventSpeakerMapper = eventSpeakerMapper;
     }
 
 
     @Override
     public List<EventDto> getEvents() {
-        List<EventDto> events = eventStruct.toDto(eventMapper.getEvents());
-        return events;
+        return eventStruct.toDto(eventMapper.getEvents());
     }
 
     @Override
     public EventDto findById(int eventId) {
-        EventDto event = eventStruct.toDto(eventMapper.findById(eventId));
-        return event;
+        return eventStruct.toDto(eventMapper.findById(eventId));
     }
 
     @Override
@@ -65,16 +57,12 @@ public class EventService implements IEventService {
     @Override
     public void remove(int eventId) {
         eventMapper.delete(eventId);
-        eventSpeakerMapper.deleteByEventId(eventId);
-        eventVisitorMapper.deleteByEventId(eventId);
 
     }
 
     @Override
     public void resurrect(int eventId) {
         eventMapper.resurrect(eventId);
-        eventSpeakerMapper.resurrectByEventId(eventId);
-        eventVisitorMapper.resurrectByEventId(eventId);
     }
 
 }

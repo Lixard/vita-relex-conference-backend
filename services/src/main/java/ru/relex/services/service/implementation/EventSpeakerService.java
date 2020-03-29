@@ -63,7 +63,7 @@ public class EventSpeakerService implements IEventSpeakerService {
 
     @Override
     public void remove(int speakerId, int eventId) {
-        eventSpeakerMapper.resurrect( speakerId, eventId);
+        eventSpeakerMapper.delete(speakerId, eventId);
     }
 
     @Override

@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "c2689419-626e-4991-b1d4-3d4674182d3e",
+		"name": "LOGIN/LOGOUT Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61f0f1f5-5865-420d-a734-7a670e4f02c9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "MOrlov",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "nd=3U44p",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/auth/login",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84363330-70b7-4fb9-9e73-2b1c956914bf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/auth/logout",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3b8acbc0-e280-4392-852f-088774733a5e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3bdc06dc-85ee-4875-a789-302021c41be7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "67dfed3a-e40c-4741-bb5e-2485396d041d",
+			"key": "Serverhost",
+			"value": "127.0.0.1",
+			"type": "string"
+		},
+		{
+			"id": "ec4448c4-1ced-4182-b871-43566d461b5a",
+			"key": "Serverport",
+			"value": "8080",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

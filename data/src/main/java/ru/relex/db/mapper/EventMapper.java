@@ -51,6 +51,7 @@ public interface EventMapper {
             "WHERE NOT (e.deleted OR c.deleted) AND e.conference_id = #{conferenceId}"
     )
     List<Event> getEventsByConferenceId(@Param("conferenceId") int conference_id);
+
     @Select(
             //language=PostgreSQL
             "SELECT " +
@@ -78,9 +79,7 @@ public interface EventMapper {
             "conference_id = #{conferenceId}, " +
             "location = #{location}, " +
             "time_start = #{timeStart}, " +
-            "time_end = #{timeEnd}, " +
-            "created_by = #{createdBy}, " +
-            "deleted = #{deleted} " +
+            "time_end = #{timeEnd} " +
             "WHERE event_id = #{eventId}"
     )
     void update(Event event);

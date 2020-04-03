@@ -62,17 +62,10 @@ public interface UserMapper {
                     "last_name = #{lastName}, " +
                     "email = #{email}, " +
                     "password = #{password}, " +
-                    "role = #{role}, " +
-                    "deleted = #{deleted} " +
+                    "role = #{role} " +
                     "WHERE user_id = #{userId}"
     )
     void update(User user);
-
-    @Update(
-            //language=PostgreSQL
-            "UPDATE users SET deleted = 'true' WHERE user_id = #{id}"
-    )
-    void delete(@Param("id") int id);
 
     @Insert(
             //language=PostgreSQL
@@ -100,6 +93,12 @@ public interface UserMapper {
             resultType = Integer.class
     )
     void insert(User user);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE users SET deleted = 'true' WHERE user_id = #{id}"
+    )
+    void delete(@Param("id") int id);
 
     @Update(
             //language=PostgreSQL

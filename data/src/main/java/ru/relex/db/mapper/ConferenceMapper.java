@@ -54,9 +54,7 @@ public interface ConferenceMapper {
             "html_description = #{htmlDescription}, " +
             "location = #{location}, " +
             "date_start = #{dateStart}, " +
-            "date_end = #{dateEnd}, " +
-            "owner = #{owner}, " +
-            "created_at = current_timestamp " +
+            "date_end = #{dateEnd} " +
             "WHERE conference_id = #{conferenceId} AND NOT deleted"
     )
     void update(Conference conference);

@@ -13,7 +13,6 @@ public class ConferenceOrganizerDto {
     @ConferenceExists
     private int conferenceId;
 
-    @UserExists
     private int createdBy;
 
     private Timestamp createdAt;

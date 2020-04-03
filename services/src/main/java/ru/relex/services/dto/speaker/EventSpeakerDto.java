@@ -14,7 +14,6 @@ public class EventSpeakerDto {
     @EventExists
     private int eventId;
 
-    @UserExists
     private int createdBy;
 
     private Timestamp createdAt;

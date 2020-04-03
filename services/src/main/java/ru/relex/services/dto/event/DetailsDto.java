@@ -1,7 +1,5 @@
 package ru.relex.services.dto.event;
 
-import ru.relex.services.constraint.annotation.UserExists;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,7 +23,6 @@ public class DetailsDto {
     @NotNull(message = Field.TIME_END + Constraint.IS_NULL)
     private Timestamp timeEnd;
 
-    @UserExists
     private int createdBy;
 
     public String getHtmlDescription() {

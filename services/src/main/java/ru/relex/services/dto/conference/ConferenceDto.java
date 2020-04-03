@@ -1,7 +1,5 @@
 package ru.relex.services.dto.conference;
 
-import ru.relex.services.constraint.annotation.UserExists;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,7 +16,6 @@ public class ConferenceDto {
     @Size(max = 50, message = Field.CONFERENCE_NAME + Constraint.TOO_LONG)
     private String conferenceName;
 
-    @UserExists
     private int owner;
 
     private boolean deleted;

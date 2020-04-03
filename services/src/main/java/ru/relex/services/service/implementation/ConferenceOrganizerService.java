@@ -3,14 +3,13 @@ package ru.relex.services.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import ru.relex.commons.model.CurrentUser;
 import ru.relex.db.mapper.ConferenceMapper;
 import ru.relex.db.mapper.ConferenceOrganizerMapper;
 import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.ConferenceOrganizer;
 import ru.relex.services.dto.conference.ConferenceDto;
-import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
-import ru.relex.services.dto.shedule.EventVisitorDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
 import ru.relex.services.mapstruct.ConferenceStruct;
@@ -31,14 +30,17 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     private UserStruct userStruct;
     private UserMapper userMapper;
 
+    private final CurrentUser currentUser;
+
     @Autowired
-    public ConferenceOrganizerService(ConferenceOrganizerMapper conferenceOrganizerMapper, ConferenceOrganizerStruct conferenceOrganizerStruct, ConferenceMapper conferenceMapper, ConferenceStruct conferenceStruct, UserStruct userStruct, UserMapper userMapper) {
+    public ConferenceOrganizerService(ConferenceOrganizerMapper conferenceOrganizerMapper, ConferenceOrganizerStruct conferenceOrganizerStruct, ConferenceMapper conferenceMapper, ConferenceStruct conferenceStruct, UserStruct userStruct, UserMapper userMapper, CurrentUser currentUser) {
         this.conferenceOrganizerMapper = conferenceOrganizerMapper;
         this.conferenceOrganizerStruct = conferenceOrganizerStruct;
         this.conferenceMapper = conferenceMapper;
         this.conferenceStruct = conferenceStruct;
         this.userMapper = userMapper;
         this.userStruct = userStruct;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -60,6 +62,7 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     @Override
     public void assignToConference(@Valid ConferenceOrganizerDto conferenceOrganizerDto) {
         ConferenceOrganizer conferenceOrganizer = conferenceOrganizerStruct.fromDto(conferenceOrganizerDto);
+        conferenceOrganizer.setCreatedBy(currentUser.getId());
         conferenceOrganizerMapper.insert(conferenceOrganizer);
     }
 

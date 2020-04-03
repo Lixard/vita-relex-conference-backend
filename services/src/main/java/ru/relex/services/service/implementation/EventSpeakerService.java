@@ -3,6 +3,7 @@ package ru.relex.services.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import ru.relex.commons.model.CurrentUser;
 import ru.relex.db.mapper.EventMapper;
 import ru.relex.db.mapper.EventSpeakerMapper;
 import ru.relex.db.mapper.UserMapper;
@@ -29,14 +30,23 @@ public class EventSpeakerService implements IEventSpeakerService {
     private UserMapper userMapper;
     private UserStruct userStruct;
 
+    private final CurrentUser currentUser;
+
     @Autowired
-    public EventSpeakerService(EventSpeakerMapper eventSpeakerMapper, EventSpeakerStruct eventSpeakerStruct,EventMapper eventMapper,EventStruct eventStruct,  UserStruct userStruct, UserMapper userMapper) {
+    public EventSpeakerService(EventSpeakerMapper eventSpeakerMapper,
+                               EventSpeakerStruct eventSpeakerStruct,
+                               EventMapper eventMapper,
+                               EventStruct eventStruct,
+                               UserStruct userStruct,
+                               UserMapper userMapper,
+                               CurrentUser currentUser) {
         this.eventSpeakerMapper = eventSpeakerMapper;
         this.eventSpeakerStruct = eventSpeakerStruct;
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
         this.userMapper = userMapper;
         this.userStruct = userStruct;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -58,6 +68,7 @@ public class EventSpeakerService implements IEventSpeakerService {
     @Override
     public void assignToEvent(@Valid EventSpeakerDto eventSpeakerDto) {
         EventSpeaker eventSpeaker = eventSpeakerStruct.fromDto(eventSpeakerDto);
+        eventSpeaker.setCreatedBy(currentUser.getId());
         eventSpeakerMapper.insert(eventSpeaker);
     }
 

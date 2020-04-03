@@ -3,6 +3,7 @@ package ru.relex.services.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import ru.relex.commons.model.CurrentUser;
 import ru.relex.db.mapper.EventMapper;
 import ru.relex.db.model.Event;
 import ru.relex.services.dto.event.EventDto;
@@ -18,10 +19,13 @@ public class EventService implements IEventService {
     private EventMapper eventMapper;
     private EventStruct eventStruct;
 
+    private final CurrentUser currentUser;
+
     @Autowired
-    public EventService(EventMapper eventMapper, EventStruct eventStruct) {
+    public EventService(EventMapper eventMapper, EventStruct eventStruct, CurrentUser currentUser) {
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
+        this.currentUser = currentUser;
     }
 
 
@@ -38,6 +42,7 @@ public class EventService implements IEventService {
     @Override
     public EventDto create(@Valid EventDto eventDto) {
         Event event = eventStruct.fromDto(eventDto);
+        event.setCreatedBy(currentUser.getId());
         eventMapper.insert(event);
         return eventStruct.toDto(event);
     }

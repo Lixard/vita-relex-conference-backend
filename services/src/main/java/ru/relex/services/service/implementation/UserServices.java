@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.User;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.mapstruct.UserAnswerStruct;
 import ru.relex.services.mapstruct.UserStruct;
 import ru.relex.services.service.IPasswordEncoderService;
 import ru.relex.services.service.IUserService;
@@ -19,37 +21,42 @@ public class UserServices implements IUserService {
     private UserMapper userMapper;
     private UserStruct userStruct;
     private IPasswordEncoderService passwordEncoderService;
+    private final UserAnswerStruct userAnswerStruct;
 
     @Autowired
-    public UserServices(UserMapper userMapper, UserStruct userStruct, IPasswordEncoderService passwordEncoderService) {
+    public UserServices(UserMapper userMapper,
+                        UserStruct userStruct,
+                        IPasswordEncoderService passwordEncoderService,
+                        UserAnswerStruct userAnswerStruct) {
         this.userMapper = userMapper;
         this.userStruct = userStruct;
         this.passwordEncoderService = passwordEncoderService;
+        this.userAnswerStruct = userAnswerStruct;
     }
 
     @Override
-    public List<UserDto> findUsers(String search) {
-        return userStruct.toDto(userMapper.getUsers(search));
+    public List<UserAnswerDto> findUsers(String search) {
+        return userAnswerStruct.toAnswerDto(userMapper.getUsers(search));
     }
 
     @Override
-    public UserDto findById(int id) {
-        return userStruct.toDto(userMapper.findById(id));
+    public UserAnswerDto findById(int id) {
+        return userAnswerStruct.toAnswerDto(userMapper.findById(id));
     }
 
     @Override
-    public UserDto create(@Valid UserDto userDto) {
+    public UserAnswerDto create(@Valid UserDto userDto) {
         User user = userStruct.fromDto(userDto);
         user.setPassword(passwordEncoderService.encode(user.getPassword()));
         userMapper.insert(user);
-        return userStruct.toDto(user);
+        return userAnswerStruct.toAnswerDto(user);
     }
 
     @Override
-    public UserDto update(@Valid UserDto userDto) {
+    public UserAnswerDto update(@Valid UserDto userDto) {
         User user = userStruct.fromDto(userDto);
         userMapper.update(user);
-        return userStruct.toDto(user);
+        return userAnswerStruct.toAnswerDto(user);
     }
 
     @Override

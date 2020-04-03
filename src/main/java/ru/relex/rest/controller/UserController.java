@@ -8,6 +8,7 @@ import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IEventSpeakerService;
@@ -40,12 +41,12 @@ public class UserController {
     }
 
     @GetMapping
-    List<UserDto> getUsers(@RequestParam(name = "search", required = false) String search) {
+    List<UserAnswerDto> getUsers(@RequestParam(name = "search", required = false) String search) {
         return userService.findUsers(search);
     }
 
     @GetMapping("/{id}")
-    UserDto findById(@PathVariable("id") int id) {
+    UserAnswerDto findById(@PathVariable("id") int id) {
         return userService.findById(id);
     }
 
@@ -65,14 +66,14 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    UserDto update(@PathVariable("id") int id, @RequestBody UserDto user) {
+    UserAnswerDto update(@PathVariable("id") int id, @RequestBody UserDto user) {
         user.setUserId(id);
         return userService.update(user);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserDto create(@RequestBody UserDto user) {
+    UserAnswerDto create(@RequestBody UserDto user) {
         return userService.create(user);
     }
 

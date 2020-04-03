@@ -1,18 +1,19 @@
 package ru.relex.services.service;
 
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
 
 import javax.validation.Valid;
 import java.util.List;
 
 public interface IUserService {
-    List<UserDto> findUsers(String search);
+    List<UserAnswerDto> findUsers(String search);
 
-    UserDto findById(int id);
+    UserAnswerDto findById(int id);
 
-    UserDto create(@Valid UserDto userDto);
+    UserAnswerDto create(@Valid UserDto userDto);
 
-    UserDto update(@Valid UserDto userDto);
+    UserAnswerDto update(@Valid UserDto userDto);
 
     void resurrect(int userId);
 

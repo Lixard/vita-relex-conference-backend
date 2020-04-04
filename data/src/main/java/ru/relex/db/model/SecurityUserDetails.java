@@ -8,6 +8,7 @@ public class SecurityUserDetails {
     private String username;
     private String password;
     private Role role;
+    private boolean deleted;
 
     public int getUserId() {
         return userId;
@@ -39,5 +40,13 @@ public class SecurityUserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

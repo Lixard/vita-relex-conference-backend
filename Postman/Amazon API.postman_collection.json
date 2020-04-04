@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "61722e55-d639-443a-873e-0b61311809ac",
+		"name": "Amazon API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "upload image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66e49c70-5ba2-4e82-9ee1-78f5302cfd58",
+						"exec": [
+							"postman.setEnvironmentVariable(\"urlImage\", responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/рабочий стол/тутуту ту ту/BbxqBGIc2Dg.jpg"
+						},
+						{
+							"key": "username",
+							"value": "MOrlov",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "nd=3U44p",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/api/aws/s3/upload",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"api",
+						"aws",
+						"s3",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://s3.eu-west-2.amazonaws.com/relex-conference-bucket/1586004034127-BbxqBGIc2Dg.jpg",
+					"protocol": "https",
+					"host": [
+						"s3",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"relex-conference-bucket",
+						"1586004034127-BbxqBGIc2Dg.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete image",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Serverhost}}:{{Serverport}}/api/aws/s3/delete?url=",
+					"host": [
+						"{{Serverhost}}"
+					],
+					"port": "{{Serverport}}",
+					"path": [
+						"api",
+						"aws",
+						"s3",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "502c775c-1f3f-48e2-b374-56aa0d359828",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ac86bbe9-6b7a-403e-8d3a-c51ccd4ebbe2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

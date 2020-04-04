@@ -1,7 +1,23 @@
 spring:
   liquibase:
     change-log: classpath:migrations/changelog.yml
+  freemarker:
+    cache: false
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   type-handlers-package: ru.relex.db.handler
+multipart:
+   maxFileSize: -1
+   maxRequestSize: 1024Mb
+# [https://console.aws.amazon.com/iam/home]
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA5MXNIXIAFO23PLV2
+      secretKey: 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
+    region: eu-west-2
+    s3:
+      bucket: relex-conference-bucket
+      endpointUrl: https://s3.eu-west-2.amazonaws.com
+

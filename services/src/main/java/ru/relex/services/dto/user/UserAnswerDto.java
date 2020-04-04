@@ -7,6 +7,7 @@ public class UserAnswerDto {
     private String username;
     private Role role;
     private PersonalInfoDto personalInfo;
+    private String linkToImage;
 
     public int getUserId() {
         return userId;
@@ -39,4 +40,13 @@ public class UserAnswerDto {
     public void setPersonalInfo(PersonalInfoDto personalInfo) {
         this.personalInfo = personalInfo;
     }
+
+    public String getLinkToImage() {
+        return linkToImage;
+    }
+
+    public void setLinkToImage(String linkToImage) {
+        this.linkToImage = linkToImage;
+    }
 }
+

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.relex.rest.service.AmazonClientService;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
@@ -17,9 +19,6 @@ import ru.relex.services.service.IUserService;
 
 import java.util.List;
 
-/**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
- * на post, delet или put)
-Пока что непонятно как это будет с фронта, пока так**/
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(
@@ -31,13 +30,14 @@ public class UserController {
     private IConferenceOrganizerService conferenceOrganizerService;
     private IEventSpeakerService eventSpeakerService;
     private IEventVisitorService eventVisitorService;
-
+    private AmazonClientService amazonClientService;
     @Autowired
-    public UserController(IUserService userService, IConferenceOrganizerService conferenceOrganizerService, IEventSpeakerService eventSpeakerService, IEventVisitorService eventVisitorService) {
+    public UserController(IUserService userService, IConferenceOrganizerService conferenceOrganizerService, IEventSpeakerService eventSpeakerService, IEventVisitorService eventVisitorService,  AmazonClientService amazonClientService) {
         this.userService = userService;
         this.conferenceOrganizerService = conferenceOrganizerService;
         this.eventSpeakerService = eventSpeakerService;
         this.eventVisitorService = eventVisitorService;
+        this.amazonClientService = amazonClientService;
     }
 
     @GetMapping
@@ -66,15 +66,18 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    UserAnswerDto update(@PathVariable("id") int id, @RequestBody UserDto user) {
+    UserAnswerDto update(@PathVariable("id") int id, @RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
         user.setUserId(id);
-        return userService.update(user);
+        amazonClientService.deleteFileFromS3Bucket(user.getLinkToImage());
+        String url = amazonClientService.uploadFile(multipartFiles);
+        return userService.update(user, url);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserAnswerDto create(@RequestBody UserDto user) {
-        return userService.create(user);
+    UserAnswerDto create(@RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
+        String url = amazonClientService.uploadFile(multipartFiles);
+        return userService.create(user, url);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

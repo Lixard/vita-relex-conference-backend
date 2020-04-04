@@ -1,0 +1,1 @@
+ALTER TABLE users ADD COLUMN "link_image" VARCHAR(160);

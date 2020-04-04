@@ -29,6 +29,8 @@ public class UserDto {
 
     private Boolean deleted;
 
+    private String linkToImage;
+
     @Valid
     @NotNull(message = Field.PERSONAL_INFO + Constraint.IS_NULL)
     private PersonalInfoDto personalInfo;
@@ -79,5 +81,13 @@ public class UserDto {
 
     public void setPersonalInfo(PersonalInfoDto personalInfo) {
         this.personalInfo = personalInfo;
+    }
+
+    public String getLinkToImage() {
+        return linkToImage;
+    }
+
+    public void setLinkToImage(String linkToImage) {
+        this.linkToImage = linkToImage;
     }
 }

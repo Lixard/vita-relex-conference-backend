@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: Kristina Maltseva
+      comment: add new field for link of image
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

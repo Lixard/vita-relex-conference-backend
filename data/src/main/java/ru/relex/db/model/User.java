@@ -12,6 +12,7 @@ public class User {
     private String password;
     private Role role;
     private Boolean deleted;
+    private String linkToImage;
 
     public int getUserId() {
         return userId;
@@ -75,5 +76,13 @@ public class User {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getLinkToImage() {
+        return linkToImage;
+    }
+
+    public void setLinkToImage(String linkToImage) {
+        this.linkToImage = linkToImage;
     }
 }

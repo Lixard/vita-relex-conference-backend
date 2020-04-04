@@ -45,17 +45,19 @@ public class UserServices implements IUserService {
     }
 
     @Override
-    public UserAnswerDto create(@Valid UserDto userDto) {
+    public UserAnswerDto create(@Valid UserDto userDto, String url) {
         User user = userStruct.fromDto(userDto);
         user.setPassword(passwordEncoderService.encode(user.getPassword()));
         userMapper.insert(user);
+        userMapper.updateUserImage(userDto.getUserId(),url);
         return userAnswerStruct.toAnswerDto(user);
     }
 
     @Override
-    public UserAnswerDto update(@Valid UserDto userDto) {
+    public UserAnswerDto update(@Valid UserDto userDto, String url) {
         User user = userStruct.fromDto(userDto);
         userMapper.update(user);
+        userMapper.updateUserImage(userDto.getUserId(),url);
         return userAnswerStruct.toAnswerDto(user);
     }
 

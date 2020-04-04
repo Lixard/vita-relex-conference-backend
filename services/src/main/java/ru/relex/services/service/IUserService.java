@@ -11,9 +11,9 @@ public interface IUserService {
 
     UserAnswerDto findById(int id);
 
-    UserAnswerDto create(@Valid UserDto userDto);
+    UserAnswerDto create(@Valid UserDto userDto, String url);
 
-    UserAnswerDto update(@Valid UserDto userDto);
+    UserAnswerDto update(@Valid UserDto userDto, String url);
 
     void resurrect(int userId);
 

@@ -30,7 +30,8 @@ public interface UserMapper {
                     "email, " +
                     "password, " +
                     "role, " +
-                    "deleted " +
+                    "deleted, " +
+                    "link_image"+
                     "FROM users " +
                     "WHERE (#{search:VARCHAR} IS NULL " +
                     "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
@@ -48,7 +49,7 @@ public interface UserMapper {
                 "email, " +
                 "password, " +
                 "role, " +
-                "deleted " +
+                "deleted, " + "link_image"+
                 "FROM users " +
                 "WHERE user_id = #{id} AND NOT deleted"
     )
@@ -105,4 +106,10 @@ public interface UserMapper {
             "UPDATE users SET deleted = 'false' WHERE user_id = #{id}"
     )
     void resurrect(@Param("id") int id);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE users SET link_image = #{linkToImage} WHERE user_id = #{id}"
+    )
+    void updateUserImage(@Param("id") int id, @Param("linkToImage") String linkToImage);
 }

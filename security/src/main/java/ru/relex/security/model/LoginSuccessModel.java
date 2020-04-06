@@ -8,6 +8,7 @@ public class LoginSuccessModel implements CurrentUser {
     private int id;
     private String username;
     private Role role;
+    private boolean authenticated;
 
     public LoginSuccessModel(CurrentUser info) {
         this.id = info.getId();
@@ -38,5 +39,13 @@ public class LoginSuccessModel implements CurrentUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
     }
 }

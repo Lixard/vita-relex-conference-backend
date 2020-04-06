@@ -23,6 +23,25 @@ public interface UserMapper {
     @Select(
             //language=PostgreSQL
             "SELECT " +
+                     "user_id, " +
+                    "username, " +
+                    "first_name, " +
+                    "last_name, " +
+                    "email, " +
+                    "password, " +
+                    "role, " +
+                    "deleted, " +
+                    "link_image "+
+                    "FROM users " +
+                    "WHERE (#{search:VARCHAR} IS NULL " +
+                    "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
+                    "AND NOT deleted"
+    )
+    List<User> getAllUsersBySearchOptions(@Param("search") String search);
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT " +
                     "user_id, " +
                     "username, " +
                     "first_name, " +
@@ -31,14 +50,13 @@ public interface UserMapper {
                     "password, " +
                     "role, " +
                     "deleted, " +
-                    "link_image"+
+                    "link_image "+
                     "FROM users " +
                     "WHERE (#{search:VARCHAR} IS NULL " +
                     "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
                     "AND NOT deleted"
     )
-    List<User> getUsers(@Param("search") String search);
-
+    List<User> getAllUsers();
     @Select(
             //language=PostgreSQL
             "SELECT " +
@@ -49,7 +67,8 @@ public interface UserMapper {
                 "email, " +
                 "password, " +
                 "role, " +
-                "deleted, " + "link_image"+
+                "deleted, " +
+                "link_image" +
                 "FROM users " +
                 "WHERE user_id = #{id} AND NOT deleted"
     )

@@ -40,9 +40,12 @@ public class UserController {
         this.amazonClientService = amazonClientService;
     }
 
-    @GetMapping
+    @GetMapping()
     List<UserAnswerDto> getUsers(@RequestParam(name = "search", required = false) String search) {
-        return userService.findUsers(search);
+        if(search == null) {
+            return userService.getUsers();
+        }
+        return userService.getUsers(search);
     }
 
     @GetMapping("/{id}")
@@ -70,14 +73,16 @@ public class UserController {
         user.setUserId(id);
         amazonClientService.deleteFileFromS3Bucket(user.getLinkToImage());
         String url = amazonClientService.uploadFile(multipartFiles);
-        return userService.update(user, url);
+        user.setLinkToImage(url);
+        return userService.update(user);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     UserAnswerDto create(@RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
         String url = amazonClientService.uploadFile(multipartFiles);
-        return userService.create(user, url);
+        user.setLinkToImage(url);
+        return userService.create(user);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

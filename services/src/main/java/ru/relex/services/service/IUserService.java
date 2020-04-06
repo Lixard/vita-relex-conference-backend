@@ -7,15 +7,19 @@ import javax.validation.Valid;
 import java.util.List;
 
 public interface IUserService {
-    List<UserAnswerDto> findUsers(String search);
+    List<UserAnswerDto> getUsers(String search);
+
+    List<UserAnswerDto> getUsers();
 
     UserAnswerDto findById(int id);
 
-    UserAnswerDto create(@Valid UserDto userDto, String url);
+    UserAnswerDto create(@Valid UserDto userDto);
 
-    UserAnswerDto update(@Valid UserDto userDto, String url);
+    UserAnswerDto update(@Valid UserDto userDto);
 
     void resurrect(int userId);
 
     void remove(int userId);
+
+
 }

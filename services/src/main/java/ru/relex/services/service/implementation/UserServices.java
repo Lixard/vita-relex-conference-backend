@@ -35,8 +35,13 @@ public class UserServices implements IUserService {
     }
 
     @Override
-    public List<UserAnswerDto> findUsers(String search) {
-        return userAnswerStruct.toAnswerDto(userMapper.getUsers(search));
+    public List<UserAnswerDto> getUsers(String search) {
+        return userAnswerStruct.toAnswerDto(userMapper.getAllUsersBySearchOptions(search));
+    }
+
+    @Override
+    public List<UserAnswerDto> getUsers() {
+        return userAnswerStruct.toAnswerDto(userMapper.getAllUsers());
     }
 
     @Override
@@ -45,19 +50,17 @@ public class UserServices implements IUserService {
     }
 
     @Override
-    public UserAnswerDto create(@Valid UserDto userDto, String url) {
+    public UserAnswerDto create(@Valid UserDto userDto) {
         User user = userStruct.fromDto(userDto);
         user.setPassword(passwordEncoderService.encode(user.getPassword()));
         userMapper.insert(user);
-        userMapper.updateUserImage(userDto.getUserId(),url);
         return userAnswerStruct.toAnswerDto(user);
     }
 
     @Override
-    public UserAnswerDto update(@Valid UserDto userDto, String url) {
+    public UserAnswerDto update(@Valid UserDto userDto) {
         User user = userStruct.fromDto(userDto);
         userMapper.update(user);
-        userMapper.updateUserImage(userDto.getUserId(),url);
         return userAnswerStruct.toAnswerDto(user);
     }
 

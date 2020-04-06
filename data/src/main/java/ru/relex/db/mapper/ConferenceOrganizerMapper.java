@@ -10,6 +10,13 @@ public interface ConferenceOrganizerMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT EXISTS(SELECT 1 FROM conference_organizers " +
+            "WHERE user_id = #{userId} AND conference_id = #{conferenceId} AND NOT deleted)"
+    )
+    boolean isOrganizerRightsExists(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT co.user_id, co.conference_id, co.created_by, co.created_at, co.deleted " +
             "FROM conference_organizers co " +
             "JOIN users u ON co.user_id = u.user_id " +

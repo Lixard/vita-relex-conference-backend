@@ -4,21 +4,19 @@ package ru.relex.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
+import ru.relex.services.service.IConferenceSecurityService;
 import ru.relex.services.service.IConferenceService;
 import ru.relex.services.service.IEventService;
 
-
 import java.util.List;
 
-
-/**Скорее всего придеться менять урлы и контроллеры к запросам на удаление и восстановление(возможно смена метода
- * на post, delet или put)
- Пока что непонятно как это будет с фронта, пока так**/
+@SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(
@@ -29,12 +27,17 @@ public class ConferenceController {
     private IConferenceService conferenceService;
     private IConferenceOrganizerService conferenceOrganizersService;
     private IEventService eventService;
+    private final IConferenceSecurityService conferenceSecurityService;
 
     @Autowired
-    public ConferenceController(IConferenceService conferenceService, IConferenceOrganizerService conferenceOrganizersService, IEventService eventService) {
+    public ConferenceController(IConferenceService conferenceService,
+                                IConferenceOrganizerService conferenceOrganizersService,
+                                IEventService eventService,
+                                IConferenceSecurityService conferenceSecurityService) {
         this.conferenceService = conferenceService;
         this.conferenceOrganizersService = conferenceOrganizersService;
         this.eventService = eventService;
+        this.conferenceSecurityService = conferenceSecurityService;
     }
 
     @GetMapping
@@ -57,32 +60,54 @@ public class ConferenceController {
         return conferenceOrganizersService.getOrganizersByConferenceId(id);
     }
 
+
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || " +
+            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
     @PutMapping("/{id}")
     ConferenceDto update(@PathVariable("id") int id, @RequestBody ConferenceDto conference) {
         conference.setConferenceId(id);
         return conferenceService.update(conference);
     }
+
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || hasRole('ROLE_COMPANY_ACCOUNT')"
+    )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ConferenceDto create(@RequestBody ConferenceDto conference) {
         return conferenceService.create(conference);
     }
 
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
     @DeleteMapping("/{id}/delete")
     void remove(@PathVariable("id") int id) {
         conferenceService.remove(id);
     }
 
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
     @PatchMapping("/{id}/resurrect")
     void resurrect(@PathVariable("id") int id) {
         conferenceService.resurrect(id);
     }
 
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
     @DeleteMapping("/{conferenceId}/organizers/{userId}/delete")
     void removeOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
         conferenceOrganizersService.remove(conferenceId,userId);
     }
 
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
     @PatchMapping("/{conferenceId}/organizers/{userId}/resurrect")
     void resurrectOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
         conferenceOrganizersService.resurrect(conferenceId,userId);

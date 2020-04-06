@@ -27,6 +27,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:2.2.5.RELEASE")
     implementation(project(":services"))
     implementation(project(":security"))
+    implementation("org.springframework.security:spring-security-config:5.3.0.RELEASE")
+    implementation("org.springframework.security:spring-security-web:5.3.0.RELEASE")
     implementation("com.amazonaws:aws-java-sdk-athena:1.11.486")
     implementation("com.amazonaws:aws-java-sdk-s3:1.11.486")
     implementation("javax.xml.bind:jaxb-api:2.1")

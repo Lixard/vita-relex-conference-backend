@@ -8,9 +8,17 @@ import java.util.List;
 @Mapper
 public interface ConferenceMapper {
 
+
     @Select(
             //language=PostgreSQL
-            "SELECT EXISTS(SELECT * FROM conferences WHERE conference_id = #{id})"
+            "SELECT EXISTS(SELECT 1 FROM conferences " +
+            "WHERE owner = #{userId} AND conference_id = #{conferenceId})"
+    )
+    boolean isOwnerRightsExists(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT EXISTS(SELECT * FROM conferences WHERE conference_id = #{id} AND NOT deleted)"
     )
     boolean isConferenceExists(@Param("id") int id);
 

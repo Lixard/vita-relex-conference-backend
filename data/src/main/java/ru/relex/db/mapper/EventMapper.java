@@ -10,7 +10,7 @@ public interface EventMapper {
 
     @Select(
             //language=PostgreSQL
-            "SELECT EXISTS(SELECT * FROM events WHERE event_id = #{id})"
+            "SELECT EXISTS(SELECT 1 FROM events WHERE event_id = #{id})"
     )
     boolean isEventExists(@Param("id") int id);
 

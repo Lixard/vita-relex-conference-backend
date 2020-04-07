@@ -10,7 +10,7 @@ public interface UserSecurityMapper {
 
     @Select(
             //language=PostgreSQL
-            "SELECT user_id, username, password, role " +
+            "SELECT user_id, username, password, role, deleted " +
             "FROM users " +
             "WHERE username = #{username}"
     )

@@ -60,6 +60,6 @@ public class UserDetailsImpl implements UserDetails, CurrentUser {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !user.isDeleted();
     }
 }

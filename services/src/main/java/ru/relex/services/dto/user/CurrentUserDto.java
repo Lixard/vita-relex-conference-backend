@@ -8,11 +8,14 @@ public class CurrentUserDto implements CurrentUser {
     private int id;
     private String username;
     private Role role;
+    private boolean authenticated;
+
 
     public CurrentUserDto(CurrentUser currentUser) {
         this.id = currentUser.getId();
         this.username = currentUser.getUsername();
         this.role = currentUser.getRole();
+        this.authenticated = true;
     }
 
     @Override
@@ -40,5 +43,13 @@ public class CurrentUserDto implements CurrentUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
     }
 }

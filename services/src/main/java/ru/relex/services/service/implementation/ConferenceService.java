@@ -50,7 +50,8 @@ public class ConferenceService implements IConferenceService {
     public ConferenceDto update(@Valid ConferenceDto conferenceDto) {
         Conference conference = conferenceStruct.fromDto(conferenceDto);
         conferenceMapper.update(conference);
-        return conferenceStruct.toDto(conference);
+        Conference updatedConference = conferenceMapper.findById(conference.getConferenceId());
+        return conferenceStruct.toDto(updatedConference);
     }
 
     @Override

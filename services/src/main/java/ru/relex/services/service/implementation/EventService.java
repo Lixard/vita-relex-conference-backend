@@ -51,7 +51,8 @@ public class EventService implements IEventService {
     public EventDto update(@Valid EventDto eventDto) {
         Event event = eventStruct.fromDto(eventDto);
         eventMapper.update(event);
-        return eventStruct.toDto(event);
+        Event updatedEvent = eventMapper.findById(event.getConferenceId());
+        return eventStruct.toDto(updatedEvent);
     }
 
     @Override
@@ -62,7 +63,6 @@ public class EventService implements IEventService {
     @Override
     public void remove(int eventId) {
         eventMapper.delete(eventId);
-
     }
 
     @Override

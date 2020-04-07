@@ -1,0 +1,1 @@
+ALTER TABLE users ALTER COLUMN "link_image" TYPE VARCHAR(250);

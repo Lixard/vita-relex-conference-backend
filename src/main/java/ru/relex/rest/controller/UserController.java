@@ -71,9 +71,9 @@ public class UserController {
     @PutMapping("/{id}")
     UserAnswerDto update(@PathVariable("id") int id, @RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
         user.setUserId(id);
-        amazonClientService.deleteFileFromS3Bucket(user.getLinkToImage());
+        amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
         String url = amazonClientService.uploadFile(multipartFiles);
-        user.setLinkToImage(url);
+        user.setLinkImage(url);
         return userService.update(user);
     }
 
@@ -81,7 +81,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     UserAnswerDto create(@RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
         String url = amazonClientService.uploadFile(multipartFiles);
-        user.setLinkToImage(url);
+        user.setLinkImage(url);
         return userService.create(user);
     }
 

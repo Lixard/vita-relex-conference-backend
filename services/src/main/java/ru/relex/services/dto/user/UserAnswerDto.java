@@ -7,7 +7,7 @@ public class UserAnswerDto {
     private String username;
     private Role role;
     private PersonalInfoDto personalInfo;
-    private String linkToImage;
+    private String linkImage;
 
     public int getUserId() {
         return userId;
@@ -41,12 +41,12 @@ public class UserAnswerDto {
         this.personalInfo = personalInfo;
     }
 
-    public String getLinkToImage() {
-        return linkToImage;
+    public String getLinkImage() {
+        return linkImage;
     }
 
-    public void setLinkToImage(String linkToImage) {
-        this.linkToImage = linkToImage;
+    public void setLinkImage(String linkImage) {
+        this.linkImage = linkImage;
     }
 }
 

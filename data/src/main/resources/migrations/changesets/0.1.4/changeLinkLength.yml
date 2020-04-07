@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: Kristina Maltseva
+      comment: change length of link
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

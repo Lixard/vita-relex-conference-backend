@@ -17,6 +17,9 @@ public interface UserAnswerStruct {
     
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "firstName", source = "personalInfo.firstName")
+    @Mapping(target = "lastName", source = "personalInfo.lastName")
+    @Mapping(target = "email", source = "personalInfo.email")
     User fromAnswerDto(UserAnswerDto userAnswerDto);
 
     List<UserAnswerDto> toAnswerDto(List<User> users);

@@ -7,4 +7,6 @@ public interface CurrentUser {
     String getUsername();
 
     Role getRole();
+
+    boolean isAuthenticated();
 }

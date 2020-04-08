@@ -14,6 +14,7 @@ public class LoginSuccessModel implements CurrentUser {
         this.id = info.getId();
         this.username = info.getUsername();
         this.role = info.getRole();
+        this.authenticated = info.isAuthenticated();
     }
 
     @Override
@@ -25,6 +26,7 @@ public class LoginSuccessModel implements CurrentUser {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -41,6 +43,7 @@ public class LoginSuccessModel implements CurrentUser {
         this.role = role;
     }
 
+    @Override
     public boolean isAuthenticated() {
         return authenticated;
     }

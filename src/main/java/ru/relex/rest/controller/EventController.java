@@ -61,8 +61,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#id) || " +
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#id)"
     )
     @PutMapping("/{id}")
     EventDto update(@PathVariable("id") int id, @RequestBody EventDto event) {
@@ -72,8 +72,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRights(#event.getConferenceId()) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRights(#event.getConferenceId())"
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -92,8 +92,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#id) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#id)"
     )
     @DeleteMapping("/{id}/delete")
     void remove(@PathVariable("id") int id) {
@@ -102,8 +102,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#id) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#id)"
     )
     @PatchMapping("/{id}/resurrect")
     void resurrect(@PathVariable("id") int id) {
@@ -112,8 +112,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#eventId) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#eventId)"
     )
     @DeleteMapping("/{eventId}/speakers/{userId}/delete")
     void removeSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {
@@ -122,8 +122,8 @@ public class EventController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#eventId) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#eventId)"
     )
     @PatchMapping("/{eventId}/speakers/{userId}/resurrect")
     void resurrectSpeaker(@PathVariable("eventId") int eventId, @PathVariable("userId") int userId) {

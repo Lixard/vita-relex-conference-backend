@@ -103,7 +103,7 @@ public class UserController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOwnerRights(#organizer.getConferenceId())"
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/assign/conference",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -113,8 +113,8 @@ public class UserController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#speaker.getEventId()) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#speaker.getEventId())"
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/assign/event", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -139,7 +139,7 @@ public class UserController {
     }
 
     @PreAuthorize(
-            "@userSecurityService.isTheSameUser(#id)"
+            "@userSecurityService.isTheSameUser(#userId)"
     )
     @DeleteMapping("/{userId}/schedule/{eventId}/delete")
     void removeSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {
@@ -147,7 +147,7 @@ public class UserController {
     }
 
     @PreAuthorize(
-            "@userSecurityService.isTheSameUser(#id)"
+            "@userSecurityService.isTheSameUser(#userId)"
     )
     @PatchMapping("/{userId}/schedule/{eventId}/resurrect")
     void resurrectSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {

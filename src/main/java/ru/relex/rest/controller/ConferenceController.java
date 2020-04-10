@@ -98,7 +98,7 @@ public class ConferenceController {
     }
 
     @PreAuthorize(
-            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#conferenceId)"
     )
     @DeleteMapping("/{conferenceId}/organizers/{userId}/delete")
     void removeOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
@@ -106,7 +106,7 @@ public class ConferenceController {
     }
 
     @PreAuthorize(
-            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#conferenceId)"
     )
     @PatchMapping("/{conferenceId}/organizers/{userId}/resurrect")
     void resurrectOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {

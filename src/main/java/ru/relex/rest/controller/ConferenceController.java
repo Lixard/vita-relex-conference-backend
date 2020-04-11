@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.user.UserAnswerDto;
-import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceSecurityService;
 import ru.relex.services.service.IConferenceService;
@@ -57,7 +56,7 @@ public class ConferenceController {
     }
 
     @GetMapping("/{id}/organizers")
-    List<UserDto> getOrganizersByConferenceId(@PathVariable("id") int id) {
+    List<UserAnswerDto> getOrganizersByConferenceId(@PathVariable("id") int id) {
         return conferenceOrganizersService.getOrganizersByConferenceId(id);
     }
 

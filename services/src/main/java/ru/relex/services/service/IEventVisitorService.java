@@ -2,7 +2,7 @@ package ru.relex.services.service;
 
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.shedule.EventVisitorDto;
-import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public interface IEventVisitorService {
     List<EventDto> getScheduleOfUser(int id);
 
-    List<UserDto> getVisitorsByEventId(int id);
+    List<UserAnswerDto> getVisitorsByEventId(int id);
 
     void subscribeOnEvent(@Valid EventVisitorDto eventVisitorDto);
 

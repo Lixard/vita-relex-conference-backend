@@ -12,10 +12,10 @@ import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.ConferenceOrganizer;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
-import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
 import ru.relex.services.mapstruct.ConferenceStruct;
-import ru.relex.services.mapstruct.UserStruct;
+import ru.relex.services.mapstruct.UserAnswerStruct;
 import ru.relex.services.service.IConferenceOrganizerService;
 
 import javax.validation.Valid;
@@ -29,7 +29,7 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     private final ConferenceOrganizerStruct conferenceOrganizerStruct;
     private final ConferenceMapper conferenceMapper;
     private final ConferenceStruct conferenceStruct;
-    private final UserStruct userStruct;
+    private final UserAnswerStruct userAnswerStruct;
     private final UserMapper userMapper;
     private final CurrentUser currentUser;
 
@@ -39,23 +39,23 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
                                       ConferenceOrganizerStruct conferenceOrganizerStruct,
                                       ConferenceMapper conferenceMapper,
                                       ConferenceStruct conferenceStruct,
-                                      UserStruct userStruct,
+                                      UserAnswerStruct userAnswerStruct,
                                       UserMapper userMapper,
                                       CurrentUser currentUser) {
         this.conferenceOrganizerMapper = conferenceOrganizerMapper;
         this.conferenceOrganizerStruct = conferenceOrganizerStruct;
         this.conferenceMapper = conferenceMapper;
         this.conferenceStruct = conferenceStruct;
+        this.userAnswerStruct = userAnswerStruct;
         this.userMapper = userMapper;
-        this.userStruct = userStruct;
         this.currentUser = currentUser;
     }
 
     @Override
-    public List<UserDto> getOrganizersByConferenceId(int id) {
+    public List<UserAnswerDto> getOrganizersByConferenceId(int id) {
         List<ConferenceOrganizerDto> conferenceOrganizers = conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.getOrganizersByConferenceId(id));
-        List<UserDto> users = new ArrayList<>();
-        conferenceOrganizers.forEach(organizers -> users.add(userStruct.toDto(userMapper.findById(organizers.getUserId()))));
+        List<UserAnswerDto> users = new ArrayList<>();
+        conferenceOrganizers.forEach(organizers -> users.add(userAnswerStruct.toAnswerDto(userMapper.findById(organizers.getUserId()))));
         return users;
     }
 

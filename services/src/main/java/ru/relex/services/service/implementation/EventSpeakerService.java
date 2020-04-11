@@ -12,10 +12,10 @@ import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.EventSpeaker;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
-import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.mapstruct.EventSpeakerStruct;
 import ru.relex.services.mapstruct.EventStruct;
-import ru.relex.services.mapstruct.UserStruct;
+import ru.relex.services.mapstruct.UserAnswerStruct;
 import ru.relex.services.service.IEventSpeakerService;
 
 import javax.validation.Valid;
@@ -30,7 +30,7 @@ public class EventSpeakerService implements IEventSpeakerService {
     private final EventMapper eventMapper;
     private final EventStruct eventStruct;
     private final UserMapper userMapper;
-    private final UserStruct userStruct;
+    private final UserAnswerStruct userAnswerStruct;
     private final CurrentUser currentUser;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -39,23 +39,23 @@ public class EventSpeakerService implements IEventSpeakerService {
                                EventSpeakerStruct eventSpeakerStruct,
                                EventMapper eventMapper,
                                EventStruct eventStruct,
-                               UserStruct userStruct,
                                UserMapper userMapper,
+                               UserAnswerStruct userAnswerStruct,
                                CurrentUser currentUser) {
         this.eventSpeakerMapper = eventSpeakerMapper;
         this.eventSpeakerStruct = eventSpeakerStruct;
         this.eventMapper = eventMapper;
         this.eventStruct = eventStruct;
         this.userMapper = userMapper;
-        this.userStruct = userStruct;
+        this.userAnswerStruct = userAnswerStruct;
         this.currentUser = currentUser;
     }
 
     @Override
-    public List<UserDto> getSpeakersByEventId(int id) {
+    public List<UserAnswerDto> getSpeakersByEventId(int id) {
         List<EventSpeakerDto> eventSpeakers = eventSpeakerStruct.toDto(eventSpeakerMapper.getSpeakersByEventId(id));
-        List<UserDto> users = new ArrayList<>();
-        eventSpeakers.forEach(visitors -> users.add(userStruct.toDto(userMapper.findById(visitors.getUserId()))));
+        List<UserAnswerDto> users = new ArrayList<>();
+        eventSpeakers.forEach(visitors -> users.add(userAnswerStruct.toAnswerDto(userMapper.findById(visitors.getUserId()))));
         return users;
     }
 

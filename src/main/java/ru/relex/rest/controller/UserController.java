@@ -33,6 +33,7 @@ public class UserController {
     private AmazonClientService amazonClientService;
     private final IConferenceSecurityService conferenceSecurityService;
     private final IUserSecurityService userSecurityService;
+    private final IConferenceService conferenceService;
 
     @Autowired
     public UserController(IUserService userService,
@@ -41,7 +42,8 @@ public class UserController {
                           IEventVisitorService eventVisitorService,
                           AmazonClientService amazonClientService,
                           IConferenceSecurityService conferenceSecurityService,
-                          IUserSecurityService userSecurityService) {
+                          IUserSecurityService userSecurityService,
+                          IConferenceService conferenceService) {
         this.userService = userService;
         this.conferenceOrganizerService = conferenceOrganizerService;
         this.eventSpeakerService = eventSpeakerService;
@@ -49,6 +51,7 @@ public class UserController {
         this.amazonClientService = amazonClientService;
         this.conferenceSecurityService = conferenceSecurityService;
         this.userSecurityService = userSecurityService;
+        this.conferenceService = conferenceService;
     }
 
     @GetMapping()
@@ -80,6 +83,11 @@ public class UserController {
     @GetMapping("/{id}/events")
     List<EventDto> getEventsBySpeakerId(@PathVariable("id") int id) {
         return eventSpeakerService.getEventsBySpeakerId(id);
+    }
+
+    @GetMapping("/{id}/conferences/owned")
+    List<ConferenceDto> getConferencesWhereUserIsOwner(@PathVariable("id") int userId) {
+        return conferenceService.getConferencesWhereUserIsOwner(userId);
     }
 
     @PreAuthorize(

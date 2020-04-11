@@ -1,12 +1,17 @@
 package ru.relex.services.service;
 
 import ru.relex.services.dto.conference.ConferenceDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 
 import javax.validation.Valid;
 import java.util.List;
 
 public interface IConferenceService {
     List<ConferenceDto> getConferences();
+
+    UserAnswerDto getConferenceOwner(int conferenceId);
+
+    List<ConferenceDto> getConferencesWhereUserIsOwner(int userId);
 
     ConferenceDto findById(int conferenceId);
 

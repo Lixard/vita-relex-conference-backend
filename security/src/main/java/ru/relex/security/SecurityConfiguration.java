@@ -66,7 +66,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/conferences/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/events", "/events/{^[\\d]$}", "/events/{^[\\d]$}/speakers").permitAll()
                 .antMatchers( "/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/{^[\\d]$}", "/users/{^[\\d]$}/events").permitAll()
+                .antMatchers(HttpMethod.GET,
+                        "/users/{^[\\d]$}",
+                        "/users/{^[\\d]$}/events",
+                        "/users/{^[\\d]$}/conferences/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.IConferenceOrganizerService;
 import ru.relex.services.service.IConferenceSecurityService;
@@ -60,6 +61,10 @@ public class ConferenceController {
         return conferenceOrganizersService.getOrganizersByConferenceId(id);
     }
 
+    @GetMapping("/{id}/owner")
+    UserAnswerDto getConferenceOwner(@PathVariable("id") int conferenceId) {
+        return conferenceService.getConferenceOwner(conferenceId);
+    }
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +

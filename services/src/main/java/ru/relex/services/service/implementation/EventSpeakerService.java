@@ -1,8 +1,10 @@
 package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import ru.relex.commons.model.CurrentUser;
 import ru.relex.db.mapper.EventMapper;
 import ru.relex.db.mapper.EventSpeakerMapper;
@@ -23,15 +25,15 @@ import java.util.List;
 @Service
 @Validated
 public class EventSpeakerService implements IEventSpeakerService {
-    private EventSpeakerMapper eventSpeakerMapper;
-    private EventSpeakerStruct eventSpeakerStruct;
-    private EventMapper eventMapper;
-    private EventStruct eventStruct;
-    private UserMapper userMapper;
-    private UserStruct userStruct;
-
+    private final EventSpeakerMapper eventSpeakerMapper;
+    private final EventSpeakerStruct eventSpeakerStruct;
+    private final EventMapper eventMapper;
+    private final EventStruct eventStruct;
+    private final UserMapper userMapper;
+    private final UserStruct userStruct;
     private final CurrentUser currentUser;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     public EventSpeakerService(EventSpeakerMapper eventSpeakerMapper,
                                EventSpeakerStruct eventSpeakerStruct,
@@ -69,7 +71,14 @@ public class EventSpeakerService implements IEventSpeakerService {
     public void assignToEvent(@Valid EventSpeakerDto eventSpeakerDto) {
         EventSpeaker eventSpeaker = eventSpeakerStruct.fromDto(eventSpeakerDto);
         eventSpeaker.setCreatedBy(currentUser.getId());
-        eventSpeakerMapper.insert(eventSpeaker);
+        if (eventSpeakerMapper.findDeletedById(eventSpeaker.getUserId(), eventSpeaker.getEventId()) != null) {
+            eventSpeakerMapper.resurrect(eventSpeaker.getUserId(), eventSpeaker.getEventId());
+            eventSpeakerMapper.update(eventSpeaker);
+        } else if (eventSpeakerMapper.isExists(eventSpeaker.getUserId(), eventSpeaker.getEventId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "RIGHTS_EXIST");
+        } else {
+            eventSpeakerMapper.insert(eventSpeaker);
+        }
     }
 
     @Override

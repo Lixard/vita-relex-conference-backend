@@ -1,8 +1,10 @@
 package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import ru.relex.db.mapper.EventMapper;
 import ru.relex.db.mapper.EventVisitorMapper;
 import ru.relex.db.mapper.UserMapper;
@@ -29,8 +31,14 @@ public class EventsVisitorService implements IEventVisitorService {
     private UserMapper userMapper;
     private UserStruct userStruct;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    public EventsVisitorService(EventVisitorMapper eventVisitorMapper, EventVisitorStruct eventVisitorStruct, EventMapper eventMapper, EventStruct eventStruct, UserMapper userMapper, UserStruct userStruct) {
+    public EventsVisitorService(EventVisitorMapper eventVisitorMapper,
+                                EventVisitorStruct eventVisitorStruct,
+                                EventMapper eventMapper,
+                                EventStruct eventStruct,
+                                UserMapper userMapper,
+                                UserStruct userStruct) {
         this.eventVisitorMapper = eventVisitorMapper;
         this.eventVisitorStruct = eventVisitorStruct;
         this.eventMapper = eventMapper;
@@ -58,7 +66,13 @@ public class EventsVisitorService implements IEventVisitorService {
     @Override
     public void subscribeOnEvent(@Valid EventVisitorDto eventVisitorDto) {
         EventVisitor eventVisitor = eventVisitorStruct.fromDto(eventVisitorDto);
-        eventVisitorMapper.insert(eventVisitor);
+        if (eventVisitorMapper.findDeletedById(eventVisitor.getUserId(), eventVisitor.getEventId()) != null) {
+            eventVisitorMapper.resurrect(eventVisitor.getUserId(), eventVisitor.getEventId());
+        } else if (eventVisitorMapper.isExists(eventVisitor.getUserId(), eventVisitor.getEventId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ALREADY_SUBSCRIBED");
+        } else {
+            eventVisitorMapper.insert(eventVisitor);
+        }
     }
 
     @Override

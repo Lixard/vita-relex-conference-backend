@@ -12,6 +12,12 @@ public interface EventVisitorMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT EXISTS(SELECT 1 FROM event_visitors WHERE user_id = #{userId} AND event_id = #{eventId})"
+    )
+    boolean isExists(@Param("userId") int userId, @Param("eventId") int eventId);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT ev.user_id, ev.event_id, ev.deleted " +
             "FROM event_visitors ev " +
             "JOIN users u ON ev.user_id = u.user_id " +
@@ -20,6 +26,15 @@ public interface EventVisitorMapper {
             "AND ev.event_id = #{eventId}"
     )
     List<EventVisitor> getVisitorsByEventId(@Param("eventId") int eventId);
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT user_id, event_id, deleted " +
+            "FROM event_visitors " +
+            "WHERE deleted "+
+            "AND user_id = #{userId} AND event_id = #{eventId}"
+    )
+    EventVisitor findDeletedById(@Param("userId") int userId, @Param("eventId") int eventId);
 
     @Select(
             //language=PostgreSQL

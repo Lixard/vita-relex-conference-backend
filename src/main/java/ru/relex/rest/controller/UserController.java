@@ -13,6 +13,7 @@ import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserPasswordChangeDto;
 import ru.relex.services.service.*;
 
 import java.util.List;
@@ -91,6 +92,16 @@ public class UserController {
         String url = amazonClientService.uploadFile(multipartFiles);
         user.setLinkImage(url);
         return userService.update(user);
+    }
+
+    @PreAuthorize(
+            "@userSecurityService.isTheSameUser(#id)"
+    )
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(path = "/{id}/password" ,consumes = MediaType.APPLICATION_JSON_VALUE)
+    void updatePassword(@PathVariable("id") int id, @RequestBody UserPasswordChangeDto userPasswordChangeDto) {
+        userPasswordChangeDto.setId(id);
+        userService.updatePassword(userPasswordChangeDto);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

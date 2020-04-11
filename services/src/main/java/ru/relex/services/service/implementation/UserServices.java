@@ -1,12 +1,15 @@
 package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.User;
 import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserPasswordChangeDto;
 import ru.relex.services.mapstruct.UserAnswerStruct;
 import ru.relex.services.mapstruct.UserStruct;
 import ru.relex.services.service.IPasswordEncoderService;
@@ -18,10 +21,10 @@ import java.util.List;
 @Service
 @Validated
 public class UserServices implements IUserService {
+    private final UserAnswerStruct userAnswerStruct;
     private UserMapper userMapper;
     private UserStruct userStruct;
     private IPasswordEncoderService passwordEncoderService;
-    private final UserAnswerStruct userAnswerStruct;
 
     @Autowired
     public UserServices(UserMapper userMapper,
@@ -62,6 +65,16 @@ public class UserServices implements IUserService {
         User user = userStruct.fromDto(userDto);
         userMapper.update(user);
         return userAnswerStruct.toAnswerDto(user);
+    }
+
+    @Override
+    public void updatePassword(@Valid UserPasswordChangeDto userPasswordChangeDto) {
+        User user = userMapper.findById(userPasswordChangeDto.getId());
+        if (!passwordEncoderService.matches(userPasswordChangeDto.getOldPassword(), user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OLDPASSWORD_INCORRECT");
+        }
+        user.setPassword(passwordEncoderService.encode(userPasswordChangeDto.getNewPassword()));
+        userMapper.updatePassword(user);
     }
 
     @Override

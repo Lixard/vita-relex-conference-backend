@@ -2,6 +2,7 @@ package ru.relex.services.service;
 
 import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserPasswordChangeDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,6 +17,8 @@ public interface IUserService {
     UserAnswerDto create(@Valid UserDto userDto);
 
     UserAnswerDto update(@Valid UserDto userDto);
+
+    void updatePassword(@Valid UserPasswordChangeDto userPasswordChangeDto);
 
     void resurrect(int userId);
 

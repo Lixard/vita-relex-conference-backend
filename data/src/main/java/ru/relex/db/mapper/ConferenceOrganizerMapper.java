@@ -17,6 +17,12 @@ public interface ConferenceOrganizerMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT EXISTS(SELECT 1 FROM conference_organizers WHERE user_id = #{userId} AND conference_id = #{conferenceId})"
+    )
+    boolean isExists(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT co.user_id, co.conference_id, co.created_by, co.created_at, co.deleted " +
             "FROM conference_organizers co " +
             "JOIN users u ON co.user_id = u.user_id " +
@@ -48,6 +54,15 @@ public interface ConferenceOrganizerMapper {
     )
     ConferenceOrganizer findById(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
 
+    @Select(
+            //language=PostgreSQL
+            "SELECT user_id, conference_id, created_by, created_at, deleted " +
+            "FROM conference_organizers " +
+            "WHERE deleted "+
+            "AND user_id = #{userId} AND conference_id = #{conferenceId}"
+    )
+    ConferenceOrganizer findDeletedById(@Param("userId") int userId, @Param("conferenceId") int conferenceId);
+
     @Update(
             //language=PostgreSQL
             "UPDATE conference_organizers SET deleted = 'true' " +
@@ -62,6 +77,13 @@ public interface ConferenceOrganizerMapper {
             "VALUES (#{userId}, #{conferenceId}, #{createdBy}, current_timestamp)"
     )
     void insert(ConferenceOrganizer conferenceOrganizer);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE conference_organizers SET created_at = current_timestamp, created_by = #{createdBy} " +
+            "WHERE user_id = #{userId} AND conference_id = #{conferenceId}"
+    )
+    void update(ConferenceOrganizer conferenceOrganizer);
 
     @Update(
             //language=PostgreSQL

@@ -81,11 +81,16 @@ public interface UserMapper {
                     "first_name = #{firstName}, " +
                     "last_name = #{lastName}, " +
                     "email = #{email}, " +
-                    "password = #{password}, " +
                     "role = #{role} " +
                     "WHERE user_id = #{userId}"
     )
     void update(User user);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE users SET password = #{password} WHERE user_id = #{userId}"
+    )
+    void updatePassword(User user);
 
     @Insert(
             //language=PostgreSQL

@@ -10,6 +10,12 @@ public interface EventSpeakerMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT EXISTS(SELECT 1 FROM event_speakers WHERE user_id = #{userId} AND event_id = #{eventId})"
+    )
+    boolean isExists(@Param("userId") int userId, @Param("eventId") int eventId);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT es.user_id, es.event_id, es.created_by, es.created_at, es.deleted " +
             "FROM event_speakers es " +
             "JOIN users u ON es.user_id = u.user_id " +
@@ -41,12 +47,29 @@ public interface EventSpeakerMapper {
     )
     EventSpeaker findById(@Param("userId") int userId, @Param("eventId") int eventId);
 
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT user_id, event_id, created_by, created_at, deleted " +
+            "FROM event_speakers " +
+            "WHERE deleted "+
+            "AND user_id = #{userId} AND event_id = #{eventId}"
+    )
+    EventSpeaker findDeletedById(@Param("userId") int userId, @Param("eventId") int eventId);
+
     @Update(
             //language=PostgreSQL
             "UPDATE event_speakers SET deleted = 'true' " +
             "WHERE user_id = #{userId} AND event_id = #{eventId}"
     )
     void delete(@Param("userId") int userId, @Param("eventId") int eventId);
+
+    @Update(
+            //language=PostgreSQL
+            "UPDATE event_speakers SET created_at = current_timestamp, created_by = #{createdBy} " +
+            "WHERE user_id = #{userId} AND event_id = #{eventId}"
+    )
+    void update(EventSpeaker eventSpeaker);
 
     @Insert(
             //language=PostgreSQL

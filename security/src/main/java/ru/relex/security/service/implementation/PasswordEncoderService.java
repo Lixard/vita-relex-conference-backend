@@ -19,4 +19,9 @@ public class PasswordEncoderService implements IPasswordEncoderService {
     public String encode(final String password) {
         return passwordEncoder.encode(password);
     }
+
+    @Override
+    public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
 }

@@ -2,12 +2,27 @@ package ru.relex.db.mapper;
 
 import org.apache.ibatis.annotations.*;
 import ru.relex.db.model.Conference;
+import ru.relex.db.model.User;
 
 import java.util.List;
 
 @Mapper
 public interface ConferenceMapper {
 
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT * FROM conferences WHERE owner = #{userId}"
+    )
+    List<Conference> getConferencesWhereUserIsOwner(int userId);
+
+    @Select(
+            //language=PostgreSQL
+            "SELECT u.user_id, u.username, u.first_name, u.last_name, u.email, u.role, u.link_image FROM conferences c " +
+            "JOIN users u ON c.owner = u.user_id " +
+            "WHERE c.conference_id = #{conferenceId} AND u.user_id = c.owner"
+    )
+    User getConferenceOwner(@Param("conferenceId") int conferenceId);
 
     @Select(
             //language=PostgreSQL

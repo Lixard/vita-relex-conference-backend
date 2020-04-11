@@ -13,6 +13,7 @@ import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
 import ru.relex.services.dto.speaker.EventSpeakerDto;
 import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserPasswordChangeDto;
 import ru.relex.services.service.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class UserController {
     private AmazonClientService amazonClientService;
     private final IConferenceSecurityService conferenceSecurityService;
     private final IUserSecurityService userSecurityService;
+    private final IConferenceService conferenceService;
 
     @Autowired
     public UserController(IUserService userService,
@@ -41,7 +43,8 @@ public class UserController {
                           IEventVisitorService eventVisitorService,
                           AmazonClientService amazonClientService,
                           IConferenceSecurityService conferenceSecurityService,
-                          IUserSecurityService userSecurityService) {
+                          IUserSecurityService userSecurityService,
+                          IConferenceService conferenceService) {
         this.userService = userService;
         this.conferenceOrganizerService = conferenceOrganizerService;
         this.eventSpeakerService = eventSpeakerService;
@@ -49,6 +52,7 @@ public class UserController {
         this.amazonClientService = amazonClientService;
         this.conferenceSecurityService = conferenceSecurityService;
         this.userSecurityService = userSecurityService;
+        this.conferenceService = conferenceService;
     }
 
     @GetMapping()
@@ -82,6 +86,11 @@ public class UserController {
         return eventSpeakerService.getEventsBySpeakerId(id);
     }
 
+    @GetMapping("/{id}/conferences/owned")
+    List<ConferenceDto> getConferencesWhereUserIsOwner(@PathVariable("id") int userId) {
+        return conferenceService.getConferencesWhereUserIsOwner(userId);
+    }
+
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
@@ -97,6 +106,16 @@ public class UserController {
         return userService.update(user);
     }
 
+    @PreAuthorize(
+            "@userSecurityService.isTheSameUser(#id)"
+    )
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(path = "/{id}/password" ,consumes = MediaType.APPLICATION_JSON_VALUE)
+    void updatePassword(@PathVariable("id") int id, @RequestBody UserPasswordChangeDto userPasswordChangeDto) {
+        userPasswordChangeDto.setId(id);
+        userService.updatePassword(userPasswordChangeDto);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     UserAnswerDto create(@RequestParam(required = false) MultipartFile multipartFiles, @RequestBody UserDto user) {
@@ -107,7 +126,7 @@ public class UserController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOwnerRights(#organizer.getConferenceId())"
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/assign/conference",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -117,8 +136,8 @@ public class UserController {
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
-            "@conferenceSecurityService.hasConferenceOrganizerRights(#id) || " +
-            "@conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "@conferenceSecurityService.hasConferenceOrganizerRightsByEventId(#speaker.getEventId()) || " +
+            "@conferenceSecurityService.hasConferenceOwnerRightsByEventId(#speaker.getEventId())"
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/assign/event", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -143,7 +162,7 @@ public class UserController {
     }
 
     @PreAuthorize(
-            "@userSecurityService.isTheSameUser(#id)"
+            "@userSecurityService.isTheSameUser(#userId)"
     )
     @DeleteMapping("/{userId}/schedule/{eventId}/delete")
     void removeSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {
@@ -151,7 +170,7 @@ public class UserController {
     }
 
     @PreAuthorize(
-            "@userSecurityService.isTheSameUser(#id)"
+            "@userSecurityService.isTheSameUser(#userId)"
     )
     @PatchMapping("/{userId}/schedule/{eventId}/resurrect")
     void resurrectSubscriber(@PathVariable("userId") int userId, @PathVariable("eventId") int eventId) {

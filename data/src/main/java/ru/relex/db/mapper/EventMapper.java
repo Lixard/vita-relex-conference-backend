@@ -10,6 +10,12 @@ public interface EventMapper {
 
     @Select(
             //language=PostgreSQL
+            "SELECT conference_id FROM events WHERE event_id = #{eventId}"
+    )
+    int getConferenceIdByEventId(@Param("eventId") Integer eventId);
+
+    @Select(
+            //language=PostgreSQL
             "SELECT EXISTS(SELECT 1 FROM events WHERE event_id = #{id})"
     )
     boolean isEventExists(@Param("id") int id);

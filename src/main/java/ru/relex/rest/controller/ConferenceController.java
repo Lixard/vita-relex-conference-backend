@@ -11,7 +11,7 @@ import ru.relex.rest.service.AmazonClientService;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.conference.PhotoArchiveDto;
 import ru.relex.services.dto.event.EventDto;
-import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.service.*;
 
 import javax.validation.Valid;
@@ -101,10 +101,14 @@ public class ConferenceController {
     }
 
     @GetMapping("/{id}/organizers")
-    List<UserDto> getOrganizersByConferenceId(@PathVariable("id") int id) {
+    List<UserAnswerDto> getOrganizersByConferenceId(@PathVariable("id") int id) {
         return conferenceOrganizersService.getOrganizersByConferenceId(id);
     }
 
+    @GetMapping("/{id}/owner")
+    UserAnswerDto getConferenceOwner(@PathVariable("id") int conferenceId) {
+        return conferenceService.getConferenceOwner(conferenceId);
+    }
 
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || " +
@@ -143,7 +147,7 @@ public class ConferenceController {
     }
 
     @PreAuthorize(
-            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#conferenceId)"
     )
     @DeleteMapping("/{conferenceId}/organizers/{userId}/delete")
     void removeOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {
@@ -151,7 +155,7 @@ public class ConferenceController {
     }
 
     @PreAuthorize(
-            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#conferenceId)"
     )
     @PatchMapping("/{conferenceId}/organizers/{userId}/resurrect")
     void resurrectOrg(@PathVariable("conferenceId") int conferenceId, @PathVariable("userId") int userId) {

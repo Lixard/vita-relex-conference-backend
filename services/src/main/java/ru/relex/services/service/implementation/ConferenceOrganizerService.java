@@ -1,8 +1,10 @@
 package ru.relex.services.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.server.ResponseStatusException;
 import ru.relex.commons.model.CurrentUser;
 import ru.relex.db.mapper.ConferenceMapper;
 import ru.relex.db.mapper.ConferenceOrganizerMapper;
@@ -10,10 +12,10 @@ import ru.relex.db.mapper.UserMapper;
 import ru.relex.db.model.ConferenceOrganizer;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
-import ru.relex.services.dto.user.UserDto;
+import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.mapstruct.ConferenceOrganizerStruct;
 import ru.relex.services.mapstruct.ConferenceStruct;
-import ru.relex.services.mapstruct.UserStruct;
+import ru.relex.services.mapstruct.UserAnswerStruct;
 import ru.relex.services.service.IConferenceOrganizerService;
 
 import javax.validation.Valid;
@@ -23,31 +25,37 @@ import java.util.List;
 @Service
 @Validated
 public class ConferenceOrganizerService implements IConferenceOrganizerService {
-    private ConferenceOrganizerMapper conferenceOrganizerMapper;
-    private ConferenceOrganizerStruct conferenceOrganizerStruct;
-    private ConferenceMapper conferenceMapper;
-    private ConferenceStruct conferenceStruct;
-    private UserStruct userStruct;
-    private UserMapper userMapper;
-
+    private final ConferenceOrganizerMapper conferenceOrganizerMapper;
+    private final ConferenceOrganizerStruct conferenceOrganizerStruct;
+    private final ConferenceMapper conferenceMapper;
+    private final ConferenceStruct conferenceStruct;
+    private final UserAnswerStruct userAnswerStruct;
+    private final UserMapper userMapper;
     private final CurrentUser currentUser;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    public ConferenceOrganizerService(ConferenceOrganizerMapper conferenceOrganizerMapper, ConferenceOrganizerStruct conferenceOrganizerStruct, ConferenceMapper conferenceMapper, ConferenceStruct conferenceStruct, UserStruct userStruct, UserMapper userMapper, CurrentUser currentUser) {
+    public ConferenceOrganizerService(ConferenceOrganizerMapper conferenceOrganizerMapper,
+                                      ConferenceOrganizerStruct conferenceOrganizerStruct,
+                                      ConferenceMapper conferenceMapper,
+                                      ConferenceStruct conferenceStruct,
+                                      UserAnswerStruct userAnswerStruct,
+                                      UserMapper userMapper,
+                                      CurrentUser currentUser) {
         this.conferenceOrganizerMapper = conferenceOrganizerMapper;
         this.conferenceOrganizerStruct = conferenceOrganizerStruct;
         this.conferenceMapper = conferenceMapper;
         this.conferenceStruct = conferenceStruct;
+        this.userAnswerStruct = userAnswerStruct;
         this.userMapper = userMapper;
-        this.userStruct = userStruct;
         this.currentUser = currentUser;
     }
 
     @Override
-    public List<UserDto> getOrganizersByConferenceId(int id) {
+    public List<UserAnswerDto> getOrganizersByConferenceId(int id) {
         List<ConferenceOrganizerDto> conferenceOrganizers = conferenceOrganizerStruct.toDto(conferenceOrganizerMapper.getOrganizersByConferenceId(id));
-        List<UserDto> users = new ArrayList<>();
-        conferenceOrganizers.forEach(organizers -> users.add(userStruct.toDto(userMapper.findById(organizers.getUserId()))));
+        List<UserAnswerDto> users = new ArrayList<>();
+        conferenceOrganizers.forEach(organizers -> users.add(userAnswerStruct.toAnswerDto(userMapper.findById(organizers.getUserId()))));
         return users;
     }
 
@@ -63,7 +71,14 @@ public class ConferenceOrganizerService implements IConferenceOrganizerService {
     public void assignToConference(@Valid ConferenceOrganizerDto conferenceOrganizerDto) {
         ConferenceOrganizer conferenceOrganizer = conferenceOrganizerStruct.fromDto(conferenceOrganizerDto);
         conferenceOrganizer.setCreatedBy(currentUser.getId());
-        conferenceOrganizerMapper.insert(conferenceOrganizer);
+        if (conferenceOrganizerMapper.findDeletedById(conferenceOrganizer.getUserId(), conferenceOrganizer.getConferenceId()) != null) {
+            conferenceOrganizerMapper.resurrect(conferenceOrganizer.getUserId(), conferenceOrganizer.getConferenceId());
+            conferenceOrganizerMapper.update(conferenceOrganizer);
+        } else if (conferenceOrganizerMapper.isExists(conferenceOrganizer.getUserId(), conferenceOrganizer.getConferenceId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "RIGHTS_EXIST");
+        } else {
+            conferenceOrganizerMapper.insert(conferenceOrganizer);
+        }
     }
 
     @Override

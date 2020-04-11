@@ -14,3 +14,9 @@ databaseChangeLog:
   - include:
       file: changesets/0.1.4/changeLinkLength.yml
       relativeToChangelogFile: true
+  - include:
+      file: changesets/0.1.5/addPhotoArchiveEntity.yml
+      relativeToChangelogFile: true
+  - include:
+      file: changesets/0.1.6/renameColumn.yml
+      relativeToChangelogFile: true

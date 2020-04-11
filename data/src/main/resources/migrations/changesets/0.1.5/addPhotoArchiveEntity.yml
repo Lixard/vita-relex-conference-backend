@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: Kristina Maltseva
+      comment: add new entity
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

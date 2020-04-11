@@ -16,6 +16,7 @@ import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 @CrossOrigin(origins = "*")
@@ -84,18 +85,21 @@ public class UserController {
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
+    //not done
     @PutMapping("/{id}")
-    UserAnswerDto update(@PathVariable("id") int id, @RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
-        user.setUserId(id);
-        amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
-        String url = amazonClientService.uploadFile(multipartFiles);
-        user.setLinkImage(url);
+    UserAnswerDto update(@PathVariable("id") int id, @RequestParam(required = false) MultipartFile multipartFiles, UserDto user) {
+        if(multipartFiles != null) {
+            user.setUserId(id);
+            amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
+            String url = amazonClientService.uploadFile(multipartFiles);
+            user.setLinkImage(url);
+        }
         return userService.update(user);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserAnswerDto create(@RequestParam("file") MultipartFile multipartFiles, @RequestBody UserDto user) {
+    UserAnswerDto create(@RequestParam(required = false) MultipartFile multipartFiles, @RequestBody UserDto user) {
         String url = amazonClientService.uploadFile(multipartFiles);
         user.setLinkImage(url);
         return userService.create(user);

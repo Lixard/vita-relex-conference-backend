@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: Kristina Maltseva
+      comment: rename column createdAt
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

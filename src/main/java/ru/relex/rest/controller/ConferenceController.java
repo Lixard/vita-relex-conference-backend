@@ -6,14 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.relex.rest.service.AmazonClientService;
 import ru.relex.services.dto.conference.ConferenceDto;
+import ru.relex.services.dto.conference.PhotoArchiveDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.user.UserDto;
-import ru.relex.services.service.IConferenceOrganizerService;
-import ru.relex.services.service.IConferenceSecurityService;
-import ru.relex.services.service.IConferenceService;
-import ru.relex.services.service.IEventService;
+import ru.relex.services.service.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
@@ -28,16 +29,22 @@ public class ConferenceController {
     private IConferenceOrganizerService conferenceOrganizersService;
     private IEventService eventService;
     private final IConferenceSecurityService conferenceSecurityService;
+    private IPhotoArchiveService photoArchiveService;
+    private AmazonClientService amazonClientService;
 
     @Autowired
     public ConferenceController(IConferenceService conferenceService,
                                 IConferenceOrganizerService conferenceOrganizersService,
                                 IEventService eventService,
-                                IConferenceSecurityService conferenceSecurityService) {
+                                IConferenceSecurityService conferenceSecurityService,
+                                IPhotoArchiveService photoArchiveService,
+                                AmazonClientService amazonClientService) {
         this.conferenceService = conferenceService;
         this.conferenceOrganizersService = conferenceOrganizersService;
         this.eventService = eventService;
         this.conferenceSecurityService = conferenceSecurityService;
+        this.photoArchiveService = photoArchiveService;
+        this.amazonClientService = amazonClientService;
     }
 
     @GetMapping
@@ -48,6 +55,44 @@ public class ConferenceController {
     @GetMapping("/{id}")
     ConferenceDto findById(@PathVariable("id") int id) {
         return conferenceService.findById(id);
+    }
+
+    @GetMapping("/{id}/album")
+    List<PhotoArchiveDto> getAlbumById(@PathVariable("id") int id) {
+        return photoArchiveService.getAlbumById(id);
+    }
+
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
+
+    @PostMapping("/{id}/album")
+    PhotoArchiveDto addPhoto(@PathVariable("id") int id,
+                             @RequestPart("json") PhotoArchiveDto photoArchiveDto,
+                             @RequestPart("file") MultipartFile multipartFile) {
+        amazonClientService.uploadFile(multipartFile);
+        photoArchiveDto.setUrl(amazonClientService.uploadFile(multipartFile));
+        return photoArchiveService.addPhoto(photoArchiveDto);
+    }
+
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
+    @DeleteMapping("/{id}/album")
+    void deleteAlbumById(@PathVariable("id") int id) {
+        for (PhotoArchiveDto i:photoArchiveService.getAlbumById(id)) {
+            amazonClientService.deleteFileFromS3Bucket(i.getUrl());
+        }
+        photoArchiveService.deleteAlbumById(id);
+    }
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
+    )
+
+    @DeleteMapping("/{id}/album/{photoId}")
+    void deletePhotoById(@PathVariable("id") int id, @PathVariable("photoId") int photoId) {
+        amazonClientService.deleteFileFromS3Bucket(photoArchiveService.getPhotoById(photoId).getUrl());
+        photoArchiveService.deletePhotoById(photoId);
     }
 
     @GetMapping("/{id}/events")

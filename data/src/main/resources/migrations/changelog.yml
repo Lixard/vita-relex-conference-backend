@@ -18,5 +18,5 @@ databaseChangeLog:
       file: changesets/0.1.5/addPhotoArchiveEntity.yml
       relativeToChangelogFile: true
   - include:
-      file: changesets/0.1.6/renameColumn.yml
+      file: changesets/0.1.6/reworkTableAlbum.yml
       relativeToChangelogFile: true

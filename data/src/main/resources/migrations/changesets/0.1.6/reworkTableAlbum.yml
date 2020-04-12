@@ -2,7 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: 8
       author: Kristina Maltseva
-      comment: rename column createdAt
+      comment: rework create table
       changes:
         - sqlFile:
             path: script.sql

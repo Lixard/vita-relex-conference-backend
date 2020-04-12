@@ -20,16 +20,6 @@ public class PhotoArchiveDto {
         this.conferenceId = conferenceId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    private int id;
-
     public String getUrl() {
         return url;
     }

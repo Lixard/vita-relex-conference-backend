@@ -68,7 +68,7 @@ public class ConferenceController {
 
     @PostMapping("/{id}/album")
     PhotoArchiveDto addPhoto(@PathVariable("id") int id,
-                             @RequestPart("json") PhotoArchiveDto photoArchiveDto,
+                             @RequestPart("photoArchiveDto") PhotoArchiveDto photoArchiveDto,
                              @RequestPart("file") MultipartFile multipartFile) {
         amazonClientService.uploadFile(multipartFile);
         photoArchiveDto.setUrl(amazonClientService.uploadFile(multipartFile));

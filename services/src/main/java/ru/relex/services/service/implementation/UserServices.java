@@ -61,8 +61,8 @@ public class UserServices implements IUserService {
     }
 
     @Override
-    public UserAnswerDto update(@Valid UserDto userDto) {
-        User user = userStruct.fromDto(userDto);
+    public UserAnswerDto update(UserAnswerDto userAnswerDto) {
+        User user = userAnswerStruct.fromAnswerDto(userAnswerDto);
         userMapper.update(user);
         return userAnswerStruct.toAnswerDto(user);
     }

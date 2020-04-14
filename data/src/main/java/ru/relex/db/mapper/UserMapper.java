@@ -76,12 +76,11 @@ public interface UserMapper {
 
     @Update(
             //language=PostgreSQL
-            "UPDATE users " +
-                    "SET username = #{username}, " +
-                    "first_name = #{firstName}, " +
+            "UPDATE users  " +
+                    "SET first_name = #{firstName}, " +
                     "last_name = #{lastName}, " +
                     "email = #{email}, " +
-                    "role = #{role} " +
+                    "role = coalesce(#{role},role) " +
                     "WHERE user_id = #{userId}"
     )
     void update(User user);

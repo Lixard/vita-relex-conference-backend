@@ -16,7 +16,7 @@ public interface IUserService {
 
     UserAnswerDto create(@Valid UserDto userDto);
 
-    UserAnswerDto update(@Valid UserDto userDto);
+    UserAnswerDto update(@Valid UserAnswerDto userAnswerDto);
 
     void updatePassword(@Valid UserPasswordChangeDto userPasswordChangeDto);
 

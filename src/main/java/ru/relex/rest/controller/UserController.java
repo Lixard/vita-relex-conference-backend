@@ -94,16 +94,26 @@ public class UserController {
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
-    //not done
+
     @PutMapping("/{id}")
-    UserAnswerDto update(@PathVariable("id") int id, @RequestParam(required = false) MultipartFile multipartFiles, UserDto user) {
-        if(multipartFiles != null) {
-            user.setUserId(id);
+    UserAnswerDto update(@PathVariable("id") int id, @RequestBody UserAnswerDto user) {
+        user.setUserId(id);
+        return userService.update(user);
+    }
+
+    @PreAuthorize(
+            "@userSecurityService.isTheSameUser(#id)"
+    )
+
+    // не проверялось с фронта
+    @PutMapping("/{id}/photo")
+    String updatePhoto(@PathVariable("id") int id, @RequestPart("file") MultipartFile multipartFiles) {
+            UserAnswerDto user = findById(id);
             amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
             String url = amazonClientService.uploadFile(multipartFiles);
             user.setLinkImage(url);
-        }
-        return userService.update(user);
+            userService.update(user);
+            return url;
     }
 
     @PreAuthorize(
@@ -116,11 +126,14 @@ public class UserController {
         userService.updatePassword(userPasswordChangeDto);
     }
 
+    // не проверялось с фронта
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserAnswerDto create(@RequestParam(required = false) MultipartFile multipartFiles, @RequestBody UserDto user) {
-        String url = amazonClientService.uploadFile(multipartFiles);
+    @PostMapping()
+    UserAnswerDto create(@RequestPart("file") MultipartFile multipartFile, @RequestPart("user") UserDto user) {
+        if(multipartFile != null){
+        String url = amazonClientService.uploadFile(multipartFile);
         user.setLinkImage(url);
+        }
         return userService.create(user);
     }
 

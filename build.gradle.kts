@@ -1,5 +1,8 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     java
+    id("org.springframework.boot") version "2.2.5.RELEASE"
 }
 
 allprojects {
@@ -8,7 +11,7 @@ allprojects {
     }
 
     group = "ru.relex"
-    version = "1.0-SNAPSHOT"
+    version = "1.0"
 
     repositories {
         mavenCentral()
@@ -34,3 +37,14 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:2.1")
     implementation("org.apache.commons:commons-io:1.3.2")
 }
+
+springBoot {
+    mainClassName = "ru.relex.rest.App"
+}
+
+val bootJar: BootJar by tasks
+
+bootJar.apply {
+    launchScript()
+}
+

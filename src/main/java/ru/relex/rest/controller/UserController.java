@@ -17,7 +17,6 @@ import ru.relex.services.dto.user.UserPasswordChangeDto;
 import ru.relex.services.service.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 @CrossOrigin(origins = "*")
@@ -94,7 +93,6 @@ public class UserController {
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
-
     @PutMapping("/{id}")
     UserAnswerDto update(@PathVariable("id") int id, @RequestBody UserAnswerDto user) {
         user.setUserId(id);
@@ -104,12 +102,13 @@ public class UserController {
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
-
     // не проверялось с фронта
     @PutMapping("/{id}/photo")
     String updatePhoto(@PathVariable("id") int id, @RequestPart("file") MultipartFile multipartFiles) {
             UserAnswerDto user = findById(id);
-            amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
+            if (user.getLinkImage() != null) {
+                amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
+            }
             String url = amazonClientService.uploadFile(multipartFiles);
             user.setLinkImage(url);
             userService.update(user);
@@ -126,14 +125,9 @@ public class UserController {
         userService.updatePassword(userPasswordChangeDto);
     }
 
-    // не проверялось с фронта
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping()
-    UserAnswerDto create(@RequestPart("file") MultipartFile multipartFile, @RequestPart("user") UserDto user) {
-        if(multipartFile != null){
-        String url = amazonClientService.uploadFile(multipartFile);
-        user.setLinkImage(url);
-        }
+    @PostMapping
+    UserAnswerDto create(@RequestBody UserDto user) {
         return userService.create(user);
     }
 

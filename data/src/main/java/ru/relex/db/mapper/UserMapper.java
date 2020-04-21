@@ -80,6 +80,7 @@ public interface UserMapper {
                     "SET first_name = #{firstName}, " +
                     "last_name = #{lastName}, " +
                     "email = #{email}, " +
+                    "link_image = #{linkImage}, " +
                     "role = coalesce(#{role},role) " +
                     "WHERE user_id = #{userId}"
     )

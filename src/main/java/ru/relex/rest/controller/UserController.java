@@ -96,15 +96,16 @@ public class UserController {
     @PutMapping("/{id}")
     UserAnswerDto update(@PathVariable("id") int id, @RequestBody UserAnswerDto user) {
         user.setUserId(id);
+        user.setLinkImage(findById(id).getLinkImage());
         return userService.update(user);
     }
 
     @PreAuthorize(
             "@userSecurityService.isTheSameUser(#id)"
     )
-    // не проверялось с фронта
+
     @PutMapping("/{id}/photo")
-    String updatePhoto(@PathVariable("id") int id, @RequestPart("file") MultipartFile multipartFiles) {
+    UserAnswerDto updatePhoto(@PathVariable("id") int id, @RequestPart("file") MultipartFile multipartFiles) {
             UserAnswerDto user = findById(id);
             if (user.getLinkImage() != null) {
                 amazonClientService.deleteFileFromS3Bucket(user.getLinkImage());
@@ -112,7 +113,7 @@ public class UserController {
             String url = amazonClientService.uploadFile(multipartFiles);
             user.setLinkImage(url);
             userService.update(user);
-            return url;
+            return user;
     }
 
     @PreAuthorize(

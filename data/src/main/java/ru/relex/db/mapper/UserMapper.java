@@ -34,7 +34,7 @@ public interface UserMapper {
                     "link_image "+
                     "FROM users " +
                     "WHERE (#{search:VARCHAR} IS NULL " +
-                    "OR CONCAT_WS('$', first_name, last_name, username) LIKE CONCAT('%', #{search:VARCHAR}, '%')) " +
+                    "OR CONCAT_WS('$', UPPER(first_name), UPPER(last_name), UPPER(username)) LIKE CONCAT('%', UPPER (#{search:VARCHAR}, '%')) " +
                     "AND NOT deleted"
     )
     List<User> getAllUsersBySearchOptions(@Param("search") String search);

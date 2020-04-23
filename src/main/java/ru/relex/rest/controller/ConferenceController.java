@@ -64,7 +64,6 @@ public class ConferenceController {
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
     )
-
     @PostMapping("/{id}/album")
     PhotoArchiveDto addPhoto(@PathVariable("id") int id,
                              @RequestPart("photoArchiveDto") PhotoArchiveDto photoArchiveDto,
@@ -84,14 +83,24 @@ public class ConferenceController {
         }
         photoArchiveService.deleteAlbumById(id);
     }
+
     @PreAuthorize(
             "hasRole('ROLE_ADMIN') || @conferenceSecurityService.hasConferenceOwnerRights(#id)"
     )
-
     @DeleteMapping("/{id}/album/{photoId}")
     void deletePhotoById(@PathVariable("id") int id, @PathVariable("photoId") int photoId) {
         amazonClientService.deleteFileFromS3Bucket(photoArchiveService.getPhotoById(photoId).getUrl());
         photoArchiveService.deletePhotoById(photoId);
+    }
+
+    @PreAuthorize(
+            "hasRole('ROLE_ADMIN') || " +
+            "@conferenceSecurityService.hasConferenceOwnerRights(#id) || " +
+            "@conferenceSecurityService.hasConferenceOrganizerRights(#id)"
+    )
+    @PutMapping("/{id}/photo")
+    ConferenceDto updateConferencePhoto(@PathVariable("id") int conferenceId, @RequestPart("file") MultipartFile multipartFile) {
+        return conferenceService.updateConferencePhoto(conferenceId, multipartFile);
     }
 
     @GetMapping("/{id}/events")

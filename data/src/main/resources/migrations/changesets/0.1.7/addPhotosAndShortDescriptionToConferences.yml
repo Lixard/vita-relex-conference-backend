@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 9
+      author: Maksim Borisov
+      comment: Add photos and short descripton to conferences
+      changes:
+        - sqlFile:
+            path: script.sql
+            relativeToChangelogFile: true

@@ -6,6 +6,8 @@ public class Conference {
     private int conferenceId;
     private String conferenceName;
     private String htmlDescription;
+    private String shortDescription;
+    private String linkImage;
     private String location;
     private Timestamp dateStart;
     private Timestamp dateEnd;
@@ -83,5 +85,21 @@ public class Conference {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLinkImage() {
+        return linkImage;
+    }
+
+    public void setLinkImage(String linkImage) {
+        this.linkImage = linkImage;
     }
 }

@@ -20,3 +20,6 @@ databaseChangeLog:
   - include:
       file: changesets/0.1.6/reworkTableAlbum.yml
       relativeToChangelogFile: true
+  - include:
+      file: changesets/0.1.7/addPhotosAndShortDescriptionToConferences.yml
+      relativeToChangelogFile: true

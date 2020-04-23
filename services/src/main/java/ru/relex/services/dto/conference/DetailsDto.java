@@ -13,6 +13,10 @@ public class DetailsDto {
     @NotBlank(message = Field.HTML_DESCRIPTION + Constraint.IS_EMPTY)
     private String htmlDescription;
 
+    private String shortDescription;
+
+    private String linkImage;
+
     @NotBlank(message = Field.LOCATION + Constraint.IS_EMPTY)
     @Size(max = 100, message = Field.LOCATION + Constraint.TOO_LONG)
     private String location;
@@ -63,5 +67,21 @@ public class DetailsDto {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLinkImage() {
+        return linkImage;
+    }
+
+    public void setLinkImage(String linkImage) {
+        this.linkImage = linkImage;
     }
 }

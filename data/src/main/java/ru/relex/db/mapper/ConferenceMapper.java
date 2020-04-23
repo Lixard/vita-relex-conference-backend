@@ -12,7 +12,18 @@ public interface ConferenceMapper {
 
     @Select(
             //language=PostgreSQL
-            "SELECT * FROM conferences WHERE owner = #{userId}"
+            "SELECT conference_id," +
+                    " conference_name," +
+                    " html_description," +
+                    " short_description," +
+                    " link_image," +
+                    " location," +
+                    " date_start," +
+                    " date_end," +
+                    " owner," +
+                    " created_at," +
+                    " deleted" +
+                    " FROM conferences WHERE owner = #{userId}"
     )
     List<Conference> getConferencesWhereUserIsOwner(int userId);
 
@@ -43,6 +54,8 @@ public interface ConferenceMapper {
             "conference_id, " +
             "conference_name, " +
             "html_description, " +
+            "short_description, " +
+            "link_image, " +
             "location, " +
             "date_start, " +
             "date_end, " +
@@ -59,6 +72,8 @@ public interface ConferenceMapper {
             "conference_id, " +
             "conference_name, " +
             "html_description, " +
+            "short_description, " +
+            "link_image, " +
             "location, " +
             "date_start, " +
             "date_end, " +
@@ -75,6 +90,8 @@ public interface ConferenceMapper {
             "UPDATE conferences SET " +
             "conference_name = #{conferenceName}, " +
             "html_description = #{htmlDescription}, " +
+            "short_description = #{shortDescription}, " +
+            "link_image = #{linkImage}, " +
             "location = #{location}, " +
             "date_start = #{dateStart}, " +
             "date_end = #{dateEnd} " +
@@ -91,9 +108,9 @@ public interface ConferenceMapper {
 
     @Insert(
             //language=PostgreSQL
-            "INSERT INTO conferences(conference_name, html_description, location," +
+            "INSERT INTO conferences(conference_name, html_description, short_description, link_image, location," +
             " date_start, date_end, owner, created_at) " +
-            "VALUES (#{conferenceName}, #{htmlDescription}, #{location}, #{dateStart}, " +
+            "VALUES (#{conferenceName}, #{htmlDescription}, #{shortDescription}, #{linkImage}, #{location}, #{dateStart}, " +
             "#{dateEnd}, #{owner}, current_timestamp)"
     )
     @SelectKey(

@@ -1,27 +1,18 @@
-package ru.relex.rest.service;
+package ru.relex.services.service.implementation;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ru.relex.services.service.IAmazonClientService;
 
 import java.io.*;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @Service
-public class AmazonClientService {
+public class AmazonClientService implements IAmazonClientService {
 
     @Autowired
     private AmazonS3Client amazonS3Client;

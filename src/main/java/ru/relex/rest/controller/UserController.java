@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.relex.rest.service.AmazonClientService;
 import ru.relex.services.dto.conference.ConferenceDto;
 import ru.relex.services.dto.event.EventDto;
 import ru.relex.services.dto.organizer.ConferenceOrganizerDto;
@@ -15,6 +14,7 @@ import ru.relex.services.dto.user.UserAnswerDto;
 import ru.relex.services.dto.user.UserDto;
 import ru.relex.services.dto.user.UserPasswordChangeDto;
 import ru.relex.services.service.*;
+import ru.relex.services.service.implementation.AmazonClientService;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class UserController {
     private IConferenceOrganizerService conferenceOrganizerService;
     private IEventSpeakerService eventSpeakerService;
     private IEventVisitorService eventVisitorService;
-    private AmazonClientService amazonClientService;
+    private IAmazonClientService amazonClientService;
     private final IConferenceSecurityService conferenceSecurityService;
     private final IUserSecurityService userSecurityService;
     private final IConferenceService conferenceService;
